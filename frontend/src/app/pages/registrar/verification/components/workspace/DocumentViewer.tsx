@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ZoomIn, ZoomOut, RotateCw, Download, Printer, Maximize, FileText } from "lucide-react";
-import { Button } from "../../../../../../components/ui/Button";
+import { Button } from "../../../../../components/ui/Button";
 
 export function DocumentViewer() {
   const [scale, setScale] = useState(1);

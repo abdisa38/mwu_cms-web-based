@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MoreVertical, Mail, User, ShieldAlert, CheckCircle2, Clock } from "lucide-react";
-import { Button } from "../../../../../components/ui/Button";
+import { Button } from "../../../../components/ui/Button";
 
 interface VerificationQueueTableProps {
   onSelectStudent: (studentId: string) => void;
