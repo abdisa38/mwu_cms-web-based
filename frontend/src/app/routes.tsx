@@ -1,0 +1,90 @@
+import React from "react";
+import { createBrowserRouter } from "react-router";
+import { LandingPage } from "./pages/LandingPage";
+import { LoginPage } from "./pages/LoginPage";
+import { RegistrationPage } from "./pages/RegistrationPage";
+import { Layout } from "./components/layout/Layout";
+import { StudentLayout } from "./pages/student/StudentLayout";
+import { StudentDashboard } from "./pages/student/StudentDashboard";
+import { MyClearance } from "./pages/student/MyClearance";
+import { MyDocuments } from "./pages/student/MyDocuments";
+import { StartNewClearance } from "./pages/student/StartNewClearance";
+import { NotificationsCenter } from "./pages/student/NotificationsCenter";
+import { MessagesCenter } from "./pages/student/MessagesCenter";
+import { StudentCertificate } from "./pages/student/StudentCertificate";
+import { StudentProfile } from "./pages/student/StudentProfile";
+import { StudentSettings } from "./pages/student/Settings";
+import { OfficerLayout } from "./pages/officer/OfficerLayout";
+import { OfficerDashboard } from "./pages/officer/OfficerDashboard";
+import { ClearanceQueue } from "./pages/officer/ClearanceQueue";
+import { PendingRequests } from "./pages/officer/PendingRequests";
+import { ApprovedRequests } from "./pages/officer/ApprovedRequests";
+import { RejectedRequests } from "./pages/officer/RejectedRequests";
+import { StudentDatabase } from "./pages/officer/StudentDatabase";
+import { OfficerNotifications } from "./pages/officer/OfficerNotifications";
+import { OfficerMessages } from "./pages/officer/OfficerMessages";
+import { OfficerAccount } from "./pages/officer/OfficerAccount";
+import { OfficerSettings } from "./pages/officer/OfficerSettings";
+import { RegistrarLayout } from "./pages/registrar/RegistrarLayout";
+import { RegistrarDashboard } from "./pages/registrar/RegistrarDashboard";
+import { UserManagement } from "./pages/registrar/UserManagement";
+import { VerifyCertificate } from "./pages/public/VerifyCertificate";
+
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: Layout,
+    children: [
+      { index: true, Component: LandingPage },
+      { path: "verify", Component: VerifyCertificate },
+      { path: "login", Component: LoginPage },
+      { path: "register", Component: RegistrationPage },
+    ],
+  },
+  {
+    path: "/student",
+    Component: StudentLayout,
+    children: [
+      { index: true, Component: StudentDashboard },
+      { path: "clearance", Component: MyClearance },
+      { path: "new-clearance", Component: StartNewClearance },
+      { path: "documents", Component: MyDocuments },
+      { path: "notifications", Component: NotificationsCenter },
+      { path: "messages", Component: MessagesCenter },
+      { path: "certificate", Component: StudentCertificate },
+      { path: "profile", Component: StudentProfile },
+      { path: "settings", Component: StudentSettings },
+    ],
+  },
+  {
+    path: "/officer",
+    Component: OfficerLayout,
+    children: [
+      { index: true, Component: OfficerDashboard },
+      { path: "pending", Component: PendingRequests },
+      { path: "approved", Component: ApprovedRequests },
+      { path: "rejected", Component: RejectedRequests },
+      { path: "students", Component: StudentDatabase },
+      { path: "notifications", Component: OfficerNotifications },
+      { path: "messages", Component: OfficerMessages },
+      { path: "account", Component: OfficerAccount },
+      { path: "reports", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Reports</h1></div> },
+      { path: "settings", Component: OfficerSettings },
+    ]
+  },
+  {
+    path: "/registrar",
+    Component: RegistrarLayout,
+    children: [
+      { index: true, Component: RegistrarDashboard },
+      { path: "users", Component: UserManagement },
+      { path: "approvals", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Final Approvals Queue</h1></div> },
+      { path: "certificates", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Certificates</h1></div> },
+      { path: "departments", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Departments</h1></div> },
+      { path: "audit-logs", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Audit Logs</h1></div> },
+      { path: "reports", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Reports</h1></div> },
+      { path: "messages", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Messages</h1></div> },
+      { path: "settings", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">System Settings</h1></div> },
+    ]
+  }
+]);
