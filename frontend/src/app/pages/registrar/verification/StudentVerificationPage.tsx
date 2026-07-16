@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RefreshCw, Download, ChevronRight, Settings, HelpCircle, UserCheck } from "lucide-react";
-import { Button } from "../../../../components/ui/Button";
+import { Button } from "../../../components/ui/Button";
 import { VerificationKPIs } from "./components/VerificationKPIs";
 import { VerificationFilters } from "./components/VerificationFilters";
 import { VerificationQueueTable } from "./components/VerificationQueueTable";
