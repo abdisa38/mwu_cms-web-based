@@ -28,6 +28,7 @@ import { OfficerSettings } from "./pages/officer/OfficerSettings";
 import { RegistrarLayout } from "./pages/registrar/RegistrarLayout";
 import { RegistrarDashboard } from "./pages/registrar/RegistrarDashboard";
 import { UserManagement } from "./pages/registrar/UserManagement";
+import { StudentVerificationPage } from "./pages/registrar/verification/StudentVerificationPage";
 import { VerifyCertificate } from "./pages/public/VerifyCertificate";
 
 export const router = createBrowserRouter([
@@ -78,6 +79,7 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: RegistrarDashboard },
       { path: "users", Component: UserManagement },
+      { path: "verification", Component: StudentVerificationPage },
       { path: "approvals", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Final Approvals Queue</h1></div> },
       { path: "certificates", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Certificates</h1></div> },
       { path: "departments", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Departments</h1></div> },
