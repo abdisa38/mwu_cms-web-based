@@ -1,5 +1,5 @@
 import { AlertTriangle, ChevronRight } from "lucide-react";
-import { Button } from "../../../../../../components/ui/Button";
+import { Button } from "../../../../../components/ui/Button";
 
 export function DuplicateWarning() {
   // Simulating that the backend found a potential duplicate

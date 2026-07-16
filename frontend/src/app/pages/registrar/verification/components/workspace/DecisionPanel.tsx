@@ -1,5 +1,5 @@
 import { CheckCircle, XCircle, AlertCircle, ShieldOff } from "lucide-react";
-import { Button } from "../../../../../../components/ui/Button";
+import { Button } from "../../../../../components/ui/Button";
 
 interface DecisionPanelProps {
   onAction: (action: 'Approve' | 'Reject' | 'RequestInfo' | 'Suspend') => void;
