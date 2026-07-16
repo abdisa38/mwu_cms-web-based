@@ -1,5 +1,5 @@
 import { X, ShieldOff, AlertTriangle } from "lucide-react";
-import { Button } from "../../../../../../components/ui/Button";
+import { Button } from "../../../../../components/ui/Button";
 
 interface SuspendModalProps {
   onClose: () => void;
