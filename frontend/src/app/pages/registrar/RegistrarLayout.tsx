@@ -169,6 +169,12 @@ export function RegistrarLayout() {
               />
             </div>
             
+            <div className="hidden xl:flex items-center gap-1 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-lg cursor-pointer transition-colors border border-transparent hover:border-slate-300">
+              <Building2 className="w-4 h-4 text-slate-500" />
+              <span className="text-sm font-medium text-slate-700">Madda Walabu University</span>
+              <span className="text-xs text-slate-400 ml-1">▼</span>
+            </div>
+            
             <button className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-colors hidden sm:flex">
               <Moon className="w-5 h-5" />
             </button>
