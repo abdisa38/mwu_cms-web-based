@@ -16,8 +16,8 @@ import {
   LogOut,
   Menu,
   Moon,
-  ShieldCheck,
-  UserCheck
+  UserCheck,
+  Clock
 } from "lucide-react";
 import { useState } from "react";
 
@@ -28,6 +28,7 @@ export function RegistrarLayout() {
   const navItems = [
     { icon: LayoutDashboard, label: "Dashboard", path: "/registrar" },
     { icon: UserCheck, label: "Student Verification", path: "/registrar/verification", badge: 14 },
+    { icon: Clock, label: "Pending Clearances", path: "/registrar/pending", badge: 24 },
     { icon: CheckSquare, label: "Final Approval", path: "/registrar/approvals", badge: 8 },
     { icon: Users, label: "User Management", path: "/registrar/users" },
     { icon: Award, label: "Certificates", path: "/registrar/certificates" },
