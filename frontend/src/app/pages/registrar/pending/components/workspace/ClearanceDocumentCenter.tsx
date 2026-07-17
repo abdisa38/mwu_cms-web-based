@@ -1,6 +1,6 @@
 import { FileText, Download, Eye, ExternalLink, CheckCircle } from "lucide-react";
 import { ClearanceDocument } from "../../data/types";
-import { Button } from "../../../../../components/ui/Button";
+import { Button } from "../../../../components/ui/Button";
 
 interface ClearanceDocumentCenterProps {
   documents: ClearanceDocument[];

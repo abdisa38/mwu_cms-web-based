@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MoreVertical, Mail, ShieldAlert, Clock, AlertCircle, FileText, CheckCircle2 } from "lucide-react";
-import { Button } from "../../../../components/ui/Button";
+import { Button } from "../../../components/ui/Button";
 import { mockPendingClearances } from "../data/mockPendingData";
 
 interface PendingQueueTableProps {
