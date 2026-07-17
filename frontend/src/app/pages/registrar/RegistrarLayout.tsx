@@ -18,7 +18,8 @@ import {
   Moon,
   UserCheck,
   Clock,
-  ShieldCheck
+  ShieldCheck,
+  Archive
 } from "lucide-react";
 import { useState } from "react";
 
@@ -31,6 +32,7 @@ export function RegistrarLayout() {
     { icon: UserCheck, label: "Student Verification", path: "/registrar/verification", badge: 14 },
     { icon: Clock, label: "Pending Clearances", path: "/registrar/pending", badge: 24 },
     { icon: CheckSquare, label: "Final Approval", path: "/registrar/approvals", badge: 8 },
+    { icon: Archive, label: "Completed Clearances", path: "/registrar/completed" },
     { icon: Users, label: "User Management", path: "/registrar/users" },
     { icon: Award, label: "Certificates", path: "/registrar/certificates" },
     { icon: Building2, label: "Departments", path: "/registrar/departments" },
