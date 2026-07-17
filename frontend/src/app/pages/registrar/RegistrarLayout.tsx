@@ -17,7 +17,8 @@ import {
   Menu,
   Moon,
   UserCheck,
-  Clock
+  Clock,
+  ShieldCheck
 } from "lucide-react";
 import { useState } from "react";
 
