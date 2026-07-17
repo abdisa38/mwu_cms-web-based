@@ -1,6 +1,6 @@
 import { AlertOctagon, Scale, Clock } from "lucide-react";
 import { Appeal } from "../../data/types";
-import { Button } from "../../../../../components/ui/Button";
+import { Button } from "../../../../../../components/ui/Button";
 
 interface AppealWarningProps {
   appeals: Appeal[];
