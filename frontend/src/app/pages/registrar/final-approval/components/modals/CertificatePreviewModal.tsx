@@ -1,8 +1,8 @@
 import { X, Download, Printer, Share2, Award, QrCode } from "lucide-react";
 import { FinalApprovalRequest } from "../../data/types";
-import { Button } from "../../../../../components/ui/Button";
+import { Button } from "../../../../../../components/ui/Button";
 import mwuLogo from "../../../../../../imports/download.jfif";
-import { ImageWithFallback } from "../../../../components/figma/ImageWithFallback";
+import { ImageWithFallback } from "../../../../../../components/figma/ImageWithFallback";
 
 interface CertificatePreviewModalProps {
   clearance: FinalApprovalRequest;

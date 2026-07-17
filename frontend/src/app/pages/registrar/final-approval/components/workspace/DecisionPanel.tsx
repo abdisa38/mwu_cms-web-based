@@ -1,5 +1,5 @@
 import { CheckCircle2, FileX2, PauseCircle, HelpCircle, XCircle } from "lucide-react";
-import { Button } from "../../../../../components/ui/Button";
+import { Button } from "../../../../../../components/ui/Button";
 import { FinalApprovalRequest } from "../../data/types";
 
 interface DecisionPanelProps {

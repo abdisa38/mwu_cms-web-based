@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { CheckCircle2, ShieldAlert, KeyRound, AlertTriangle } from "lucide-react";
 import { FinalApprovalRequest } from "../../data/types";
-import { Button } from "../../../../../components/ui/Button";
+import { Button } from "../../../../../../components/ui/Button";
 
 interface FinalApproveModalProps {
   clearance: FinalApprovalRequest;
