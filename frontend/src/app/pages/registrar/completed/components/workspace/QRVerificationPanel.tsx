@@ -1,6 +1,6 @@
 import { ShieldCheck, ShieldAlert, MonitorSmartphone, MapPin, Search } from "lucide-react";
 import { CompletedClearance } from "../../data/types";
-import { Button } from "../../../../../../components/ui/Button";
+import { Button } from "../../../../../components/ui/Button";
 
 export function QRVerificationPanel({ clearance }: { clearance: CompletedClearance }) {
   const { certificate } = clearance;

@@ -1,6 +1,6 @@
 import { X, ShieldAlert, KeyRound, AlertTriangle } from "lucide-react";
 import { CompletedClearance } from "../../data/types";
-import { Button } from "../../../../../../components/ui/Button";
+import { Button } from "../../../../../components/ui/Button";
 
 export function RevokeCertificateModal({ clearance, onClose }: { clearance: CompletedClearance, onClose: () => void }) {
   return (
