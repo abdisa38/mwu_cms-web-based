@@ -1,6 +1,6 @@
 import { ShieldCheck, Download } from "lucide-react";
 import { AuditLogEntry } from "../../data/types";
-import { Button } from "../../../../../components/ui/Button";
+import { Button } from "../../../../../../components/ui/Button";
 
 interface ClearanceAuditLogProps {
   logs: AuditLogEntry[];

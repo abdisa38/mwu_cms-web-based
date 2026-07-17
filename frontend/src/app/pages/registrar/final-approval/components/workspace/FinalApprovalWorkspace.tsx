@@ -9,7 +9,7 @@ import { AppealWarning } from "./AppealWarning";
 import { DepartmentApprovalMatrix } from "./DepartmentApprovalMatrix";
 import { ClearanceDocumentCenter } from "./ClearanceDocumentCenter";
 import { ClearanceAuditLog } from "./ClearanceAuditLog";
-import { Button } from "../../../../../components/ui/Button";
+import { Button } from "../../../../../../components/ui/Button";
 
 // Modals
 import { FinalApproveModal } from "../modals/FinalApproveModal";
