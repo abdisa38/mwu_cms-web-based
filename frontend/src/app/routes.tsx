@@ -30,6 +30,7 @@ import { RegistrarDashboard } from "./pages/registrar/RegistrarDashboard";
 import { UserManagement } from "./pages/registrar/UserManagement";
 import { StudentVerificationPage } from "./pages/registrar/verification/StudentVerificationPage";
 import { PendingClearancesPage } from "./pages/registrar/pending/PendingClearancesPage";
+import { FinalApprovalPage } from "./pages/registrar/final-approval/FinalApprovalPage";
 import { VerifyCertificate } from "./pages/public/VerifyCertificate";
 
 export const router = createBrowserRouter([
@@ -82,7 +83,7 @@ export const router = createBrowserRouter([
       { path: "users", Component: UserManagement },
       { path: "verification", Component: StudentVerificationPage },
       { path: "pending", Component: PendingClearancesPage },
-      { path: "approvals", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Final Approvals Queue</h1></div> },
+      { path: "approvals", Component: FinalApprovalPage },
       { path: "certificates", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Certificates</h1></div> },
       { path: "departments", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Departments</h1></div> },
       { path: "audit-logs", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Audit Logs</h1></div> },
