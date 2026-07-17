@@ -1,5 +1,5 @@
 import { ShieldAlert, User, Building, UserCheck, AlertTriangle, MessageSquare, Send, CornerUpRight, CheckCircle2, XCircle, Clock } from "lucide-react";
-import { Button } from "../../../../components/ui/Button";
+import { Button } from "../../../../../components/ui/Button";
 import { ClearanceRequest } from "../../data/types";
 
 interface ClearanceStatusPanelProps {
