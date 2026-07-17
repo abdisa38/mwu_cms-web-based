@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { CompletedClearancesPage } from "./CompletedClearancesPage";
 import { Building2, Search, Filter, Download, HelpCircle, Archive, ShieldCheck, Settings } from "lucide-react";
 import { Button } from "../../../components/ui/Button";
 import { CompletedKPIs } from "./components/CompletedKPIs";
