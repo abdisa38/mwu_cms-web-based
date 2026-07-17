@@ -1,6 +1,6 @@
 import { Clock, CheckCircle2, XCircle, AlertCircle, HelpCircle } from "lucide-react";
 import { FinalApprovalRequest, DepartmentApproval } from "../../data/types";
-import { Button } from "../../../../../../components/ui/Button";
+import { Button } from "../../../../../components/ui/Button";
 
 interface DepartmentApprovalMatrixProps {
   clearance: FinalApprovalRequest;
