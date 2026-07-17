@@ -1,6 +1,6 @@
 import { CreditCard, CheckCircle2, XCircle, AlertTriangle, FileSignature } from "lucide-react";
 import { FinalApprovalRequest } from "../../data/types";
-import { Button } from "../../../../../../components/ui/Button";
+import { Button } from "../../../../../components/ui/Button";
 
 interface PhysicalIDVerificationProps {
   clearance: FinalApprovalRequest;
