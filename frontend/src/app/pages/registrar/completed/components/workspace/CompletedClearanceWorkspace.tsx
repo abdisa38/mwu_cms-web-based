@@ -7,6 +7,12 @@ import { CertificateCenterPanel } from "./CertificateCenterPanel";
 import { QRVerificationPanel } from "./QRVerificationPanel";
 import { ClearanceDocumentArchive } from "./ClearanceDocumentArchive";
 import { CompleteTimeline } from "./CompleteTimeline";
+import { Button } from "../../../../../../components/ui/Button";
+
+// Modals
+import { CorrectionRequestModal } from "../modals/CorrectionRequestModal";
+import { RevokeCertificateModal } from "../modals/RevokeCertificateModal";
+import { RegenerateCertificateModal } from "../modals/RegenerateCertificateModal";
 
 interface CompletedClearanceWorkspaceProps {
   clearance: CompletedClearance | null;
@@ -17,6 +23,9 @@ type TabType = "summary" | "history" | "certificate" | "verification" | "documen
 
 export function CompletedClearanceWorkspace({ clearance, onClose }: CompletedClearanceWorkspaceProps) {
   const [activeTab, setActiveTab] = useState<TabType>("summary");
+  const [showCorrectionModal, setShowCorrectionModal] = useState(false);
+  const [showRevokeModal, setShowRevokeModal] = useState(false);
+  const [showRegenerateModal, setShowRegenerateModal] = useState(false);
 
   if (!clearance) return null;
 
@@ -84,6 +93,37 @@ export function CompletedClearanceWorkspace({ clearance, onClose }: CompletedCle
         {activeTab === "documents" && <ClearanceDocumentArchive clearance={clearance} />}
         {activeTab === "timeline" && <CompleteTimeline clearance={clearance} />}
       </div>
+
+      {/* Sticky Action Footer */}
+      <div className="bg-white border-t border-slate-200 px-6 py-4 flex items-center justify-between shrink-0">
+        <Button 
+          variant="outline" 
+          className="bg-white text-slate-700 border-slate-200 hover:bg-slate-50 font-medium"
+          onClick={() => setShowCorrectionModal(true)}
+        >
+          Request Correction
+        </Button>
+        <div className="flex gap-3">
+          <Button 
+            variant="outline" 
+            className="bg-white text-red-600 border-red-200 hover:bg-red-50 font-medium"
+            onClick={() => setShowRevokeModal(true)}
+          >
+            Revoke Certificate
+          </Button>
+          <Button 
+            className="bg-blue-600 hover:bg-blue-700 text-white font-medium shadow-sm"
+            onClick={() => setShowRegenerateModal(true)}
+          >
+            Regenerate Certificate
+          </Button>
+        </div>
+      </div>
+
+      {/* Modals */}
+      {showCorrectionModal && <CorrectionRequestModal onClose={() => setShowCorrectionModal(false)} clearance={clearance} />}
+      {showRevokeModal && <RevokeCertificateModal onClose={() => setShowRevokeModal(false)} clearance={clearance} />}
+      {showRegenerateModal && <RegenerateCertificateModal onClose={() => setShowRegenerateModal(false)} clearance={clearance} />}
     </div>
   );
 }
