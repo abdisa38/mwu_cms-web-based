@@ -1,5 +1,12 @@
+import { useState } from "react";
 import { CertificateRecord } from "../../data/types";
 import { Certificate } from "@/app/components/shared/Certificate";
+import { AlertCircle, Clock, CheckCircle2 } from "lucide-react";
+import { Button } from "@/app/components/ui/Button";
+import { GenerateCertificateModal } from "../modals/GenerateCertificateModal";
+import { RequestCorrectionModal } from "../modals/RequestCorrectionModal";
+import { RegenerateCertificateModal } from "../modals/RegenerateCertificateModal";
+import { RevokeCertificateModal } from "../modals/RevokeCertificateModal";
 import { AlertCircle, Clock, CheckCircle2 } from "lucide-react";
 import { Button } from "@/app/components/ui/Button";
 
@@ -8,6 +15,11 @@ interface CertificatePreviewPanelProps {
 }
 
 export function CertificatePreviewPanel({ certificate }: CertificatePreviewPanelProps) {
+  const [isGenerateOpen, setIsGenerateOpen] = useState(false);
+  const [isCorrectionOpen, setIsCorrectionOpen] = useState(false);
+  const [isRegenerateOpen, setIsRegenerateOpen] = useState(false);
+  const [isRevokeOpen, setIsRevokeOpen] = useState(false);
+
   if (certificate.certificateStatus === "Pending Generation") {
     return (
       <div className="flex flex-col items-center justify-center py-20 px-4 text-center">
