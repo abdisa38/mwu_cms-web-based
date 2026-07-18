@@ -6,6 +6,7 @@ import { Button } from "@/app/components/ui/Button";
 import { StaffOverviewTab } from "./tabs/StaffOverviewTab";
 import { StaffPermissionsTab } from "./tabs/StaffPermissionsTab";
 import { StaffActivityTab } from "./tabs/StaffActivityTab";
+import { SuspendStaffModal } from "../modals/SuspendStaffModal";
 
 interface StaffProfileWorkspaceProps {
   staff: StaffRecord;
@@ -15,6 +16,7 @@ interface StaffProfileWorkspaceProps {
 
 export function StaffProfileWorkspace({ staff, onClose, onSuspend }: StaffProfileWorkspaceProps) {
   const [activeTab, setActiveTab] = useState("overview");
+  const [isSuspendModalOpen, setIsSuspendModalOpen] = useState(false);
 
   const tabs = [
     { id: "overview", label: "Overview", icon: User },
@@ -61,7 +63,7 @@ export function StaffProfileWorkspace({ staff, onClose, onSuspend }: StaffProfil
           </div>
           <div className="flex items-center gap-2">
             <Button variant="outline" className="text-slate-600">Edit Profile</Button>
-            <Button variant="outline" className="text-red-600 border-red-200 hover:bg-red-50" onClick={onSuspend}>Suspend</Button>
+            <Button variant="outline" className="text-red-600 border-red-200 hover:bg-red-50" onClick={() => setIsSuspendModalOpen(true)}>Suspend</Button>
             <Button variant="outline" className="text-slate-600 px-2"><MoreVertical className="w-4 h-4" /></Button>
           </div>
         </div>
@@ -106,6 +108,12 @@ export function StaffProfileWorkspace({ staff, onClose, onSuspend }: StaffProfil
         </div>
 
       </div>
+
+      <SuspendStaffModal 
+        isOpen={isSuspendModalOpen}
+        onClose={() => setIsSuspendModalOpen(false)}
+        staffName={staff.fullName}
+      />
     </div>
   );
 }
