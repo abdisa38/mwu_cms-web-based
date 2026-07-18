@@ -4,9 +4,9 @@ import { X, GitBranch, FileCheck, Clock, Settings, Bell, History } from "lucide-
 import { Button } from "@/app/components/ui/Button";
 
 import { VisualWorkflowDesigner } from "../designer/VisualWorkflowDesigner";
-import { DocumentRequirementsTab } from "./tabs/DocumentRequirementsTab";
-import { DeadlinesEscalationsTab } from "./tabs/DeadlinesEscalationsTab";
-import { NotificationsAuditTab } from "./tabs/NotificationsAuditTab";
+import { DocumentRequirementsTab } from "../tabs/DocumentRequirementsTab";
+import { DeadlinesEscalationsTab } from "../tabs/DeadlinesEscalationsTab";
+import { NotificationsAuditTab } from "../tabs/NotificationsAuditTab";
 
 import { PublishWorkflowModal } from "../modals/PublishWorkflowModal";
 import { WorkflowPreviewModal } from "../modals/WorkflowPreviewModal";
