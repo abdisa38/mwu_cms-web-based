@@ -89,6 +89,7 @@ export const router = createBrowserRouter([
       { index: true, Component: RegistrarDashboard },
       { path: "users", Component: UserManagement },
       { path: "students", Component: RegistrarStudentDatabasePage },
+      { path: "departments", Component: () => { window.location.href = '/registrar/staff-departments'; return null; } },
       { path: "staff-departments", Component: StaffDepartmentsPage },
       { path: "workflow-configuration", Component: WorkflowConfigurationPage },
       { path: "audit-logs", Component: AuditLogsPage },
