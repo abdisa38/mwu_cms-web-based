@@ -33,10 +33,10 @@ import { PendingClearancesPage } from "./pages/registrar/pending/PendingClearanc
 import { CompletedClearancesPage } from "./pages/registrar/completed/CompletedClearancesPage";
 import { RejectedClearancesPage } from "./pages/registrar/rejected/RejectedClearancesPage";
 import { VerifyCertificate } from "./pages/public/VerifyCertificate";
-import { FinalApprovalPage } from "./pages/registrar/final-approval/FinalApprovalPage";
 import { CertificatesPage } from "./pages/registrar/certificates/CertificatesPage";
 import { StudentDatabasePage as RegistrarStudentDatabasePage } from "./pages/registrar/students/StudentDatabasePage";
 import { StaffDepartmentsPage } from "./pages/registrar/staff-departments/StaffDepartmentsPage";
+import { WorkflowConfigurationPage } from "./pages/registrar/workflow-configuration/WorkflowConfigurationPage";
 
 export const router = createBrowserRouter([
   {
@@ -88,6 +88,7 @@ export const router = createBrowserRouter([
       { path: "users", Component: UserManagement },
       { path: "students", Component: RegistrarStudentDatabasePage },
       { path: "staff-departments", Component: StaffDepartmentsPage },
+      { path: "workflow-configuration", Component: WorkflowConfigurationPage },
       { path: "verification", Component: StudentVerificationPage },
       { path: "pending", Component: PendingClearancesPage },
       { path: "approvals", Component: FinalApprovalPage },
