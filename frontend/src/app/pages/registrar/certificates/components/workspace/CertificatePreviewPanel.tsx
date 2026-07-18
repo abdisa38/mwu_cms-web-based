@@ -7,8 +7,7 @@ import { GenerateCertificateModal } from "../modals/GenerateCertificateModal";
 import { RequestCorrectionModal } from "../modals/RequestCorrectionModal";
 import { RegenerateCertificateModal } from "../modals/RegenerateCertificateModal";
 import { RevokeCertificateModal } from "../modals/RevokeCertificateModal";
-import { AlertCircle, Clock, CheckCircle2 } from "lucide-react";
-import { Button } from "@/app/components/ui/Button";
+
 
 interface CertificatePreviewPanelProps {
   certificate: CertificateRecord;
