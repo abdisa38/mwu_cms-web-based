@@ -26,7 +26,7 @@ import { OfficerMessages } from "./pages/officer/OfficerMessages";
 import { OfficerAccount } from "./pages/officer/OfficerAccount";
 import { OfficerSettings } from "./pages/officer/OfficerSettings";
 import { RegistrarLayout } from "./pages/registrar/RegistrarLayout";
-import { Dashboard as RegistrarDashboard } from "./pages/registrar/Dashboard";
+import { RegistrarDashboard } from "./pages/registrar/RegistrarDashboard";
 import { UserManagement } from "./pages/registrar/UserManagement";
 import { StudentVerificationPage } from "./pages/registrar/verification/StudentVerificationPage";
 import { PendingClearancesPage } from "./pages/registrar/pending/PendingClearancesPage";
