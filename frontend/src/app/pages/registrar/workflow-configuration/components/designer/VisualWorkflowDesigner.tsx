@@ -1,5 +1,5 @@
-import { ClearanceType } from "../../../data/types";
-import { mockWorkflowNodesGraduation, mockWorkflowEdgesGraduation } from "../../../data/mockData";
+import { ClearanceType } from "../../data/types";
+import { mockWorkflowNodesGraduation, mockWorkflowEdgesGraduation } from "../../data/mockData";
 import { Plus, Maximize, ZoomIn, ZoomOut, Save, Search, PlayCircle } from "lucide-react";
 import { Button } from "@/app/components/ui/Button";
 
