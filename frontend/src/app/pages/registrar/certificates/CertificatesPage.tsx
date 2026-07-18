@@ -7,10 +7,12 @@ import { CertificateTable } from "./components/CertificateTable";
 import { mockCertificates } from "./data/mockCertificates";
 import { CertificateRecord } from "./data/types";
 import { CertificateWorkspace } from "./components/workspace/CertificateWorkspace";
+import { GenerateCertificateModal } from "./components/modals/GenerateCertificateModal";
 
 export function CertificatesPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCertificate, setSelectedCertificate] = useState<CertificateRecord | null>(null);
+  const [isGenerateModalOpen, setIsGenerateModalOpen] = useState(false);
 
   return (
     <div className="flex-1 flex flex-col bg-slate-50 min-h-screen relative overflow-hidden">
@@ -47,7 +49,10 @@ export function CertificatesPage() {
               <Download className="w-4 h-4" />
               <span className="hidden sm:inline">Export</span>
             </Button>
-            <Button className="gap-2 bg-blue-600 hover:bg-blue-700 text-white shadow-sm">
+            <Button 
+              className="gap-2 bg-blue-600 hover:bg-blue-700 text-white shadow-sm"
+              onClick={() => setIsGenerateModalOpen(true)}
+            >
               <Plus className="w-4 h-4" />
               <span className="hidden sm:inline">Generate Certificate</span>
             </Button>
@@ -85,6 +90,13 @@ export function CertificatesPage() {
       <CertificateWorkspace 
         certificate={selectedCertificate} 
         onClose={() => setSelectedCertificate(null)} 
+      />
+
+      <GenerateCertificateModal 
+        certificate={mockCertificates[1]} // Use the pending one for the demo
+        isOpen={isGenerateModalOpen}
+        onClose={() => setIsGenerateModalOpen(false)}
+        onGenerate={() => {}}
       />
     </div>
   );
