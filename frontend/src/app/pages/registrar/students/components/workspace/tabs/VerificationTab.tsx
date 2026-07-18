@@ -1,10 +1,13 @@
 import { StudentRecord } from "../../../data/types";
 import { ShieldCheck, CheckCircle2, Clock, XCircle, FileText, Download, ExternalLink } from "lucide-react";
 import { Button } from "@/app/components/ui/Button";
+import { VerifyStudentModal } from "../../modals/VerifyStudentModal";
+import { useState } from "react";
 
 export function VerificationTab({ student }: { student: StudentRecord }) {
   const isVerified = student.verificationStatus === "Verified";
   const isPending = student.verificationStatus === "Pending";
+  const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false);
 
   return (
     <div className="space-y-6">
@@ -37,8 +40,8 @@ export function VerificationTab({ student }: { student: StudentRecord }) {
         
         {isPending && (
           <div className="flex gap-2">
-            <Button className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm">Approve</Button>
-            <Button variant="outline" className="border-red-200 text-red-600 hover:bg-red-50 text-sm">Reject</Button>
+            <Button className="bg-emerald-600 hover:bg-emerald-700 text-white text-sm" onClick={() => setIsVerifyModalOpen(true)}>Approve</Button>
+            <Button variant="outline" className="border-red-200 text-red-600 hover:bg-red-50 text-sm" onClick={() => setIsVerifyModalOpen(true)}>Reject</Button>
           </div>
         )}
       </div>
@@ -103,6 +106,12 @@ export function VerificationTab({ student }: { student: StudentRecord }) {
           </div>
         </div>
       </div>
+
+      <VerifyStudentModal 
+        isOpen={isVerifyModalOpen}
+        onClose={() => setIsVerifyModalOpen(false)}
+        studentName={student.fullName}
+      />
     </div>
   );
 }

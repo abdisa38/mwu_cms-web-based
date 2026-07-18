@@ -1,9 +1,12 @@
 import { StudentRecord } from "../../../data/types";
 import { Settings, ShieldAlert, Key, LogOut, CheckCircle2, History } from "lucide-react";
 import { Button } from "@/app/components/ui/Button";
+import { SuspendAccountModal } from "../../modals/SuspendAccountModal";
+import { useState } from "react";
 
 export function AccountManagementTab({ student }: { student: StudentRecord }) {
   const isSuspended = student.accountStatus === "Suspended";
+  const [isSuspendModalOpen, setIsSuspendModalOpen] = useState(false);
 
   return (
     <div className="space-y-8">
@@ -84,6 +87,7 @@ export function AccountManagementTab({ student }: { student: StudentRecord }) {
               className={`shrink-0 text-white shadow-sm ${
                 isSuspended ? "bg-emerald-600 hover:bg-emerald-700" : "bg-red-600 hover:bg-red-700"
               }`}
+              onClick={() => !isSuspended && setIsSuspendModalOpen(true)}
             >
               {isSuspended ? "Reactivate Student" : "Suspend Student"}
             </Button>
@@ -92,6 +96,11 @@ export function AccountManagementTab({ student }: { student: StudentRecord }) {
         </div>
       </div>
 
+      <SuspendAccountModal 
+        isOpen={isSuspendModalOpen}
+        onClose={() => setIsSuspendModalOpen(false)}
+        studentName={student.fullName}
+      />
     </div>
   );
 }
