@@ -4,9 +4,10 @@ import { Button } from "@/app/components/ui/Button";
 
 interface DepartmentsTableProps {
   departments: DepartmentRecord[];
+  onDepartmentClick?: (dept: DepartmentRecord) => void;
 }
 
-export function DepartmentsTable({ departments }: DepartmentsTableProps) {
+export function DepartmentsTable({ departments, onDepartmentClick }: DepartmentsTableProps) {
   
   return (
     <div className="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
@@ -30,7 +31,11 @@ export function DepartmentsTable({ departments }: DepartmentsTableProps) {
           </thead>
           <tbody className="divide-y divide-slate-100">
             {departments.map((dept) => (
-              <tr key={dept.id} className="hover:bg-slate-50 transition-colors cursor-pointer group">
+              <tr 
+                key={dept.id} 
+                className="hover:bg-slate-50 transition-colors cursor-pointer group"
+                onClick={() => onDepartmentClick?.(dept)}
+              >
                 <td className="p-4">
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center border border-indigo-100">

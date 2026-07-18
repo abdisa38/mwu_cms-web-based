@@ -11,6 +11,7 @@ import { Users, Building2, Shield, Key } from "lucide-react";
 import { AddStaffModal } from "./components/modals/AddStaffModal";
 import { AddDepartmentModal } from "./components/modals/AddDepartmentModal";
 import { StaffProfileWorkspace } from "./components/workspace/StaffProfileWorkspace";
+import { DepartmentWorkspace } from "./components/workspace/DepartmentWorkspace";
 
 export function StaffDepartmentsPage() {
   const [activeTab, setActiveTab] = useState("staff");
@@ -18,6 +19,7 @@ export function StaffDepartmentsPage() {
   const [selectedStatus, setSelectedStatus] = useState("All");
 
   const [selectedStaff, setSelectedStaff] = useState<StaffRecord | null>(null);
+  const [selectedDepartment, setSelectedDepartment] = useState<DepartmentRecord | null>(null);
   
   const [isAddStaffOpen, setIsAddStaffOpen] = useState(false);
   const [isAddDeptOpen, setIsAddDeptOpen] = useState(false);
@@ -98,7 +100,10 @@ export function StaffDepartmentsPage() {
 
         {activeTab === "departments" && (
           <div className="space-y-6 animate-in fade-in duration-300">
-            <DepartmentsTable departments={mockDepartments} />
+            <DepartmentsTable 
+              departments={mockDepartments} 
+              onDepartmentClick={(dept) => setSelectedDepartment(dept)} 
+            />
           </div>
         )}
 
@@ -123,6 +128,13 @@ export function StaffDepartmentsPage() {
           staff={selectedStaff} 
           onClose={() => setSelectedStaff(null)} 
           onSuspend={() => {}}
+        />
+      )}
+
+      {selectedDepartment && (
+        <DepartmentWorkspace 
+          department={selectedDepartment}
+          onClose={() => setSelectedDepartment(null)}
         />
       )}
 
