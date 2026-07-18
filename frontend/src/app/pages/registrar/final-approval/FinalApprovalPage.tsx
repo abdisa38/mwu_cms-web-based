@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RefreshCw, Download, ChevronRight, Settings, HelpCircle } from "lucide-react";
-import { Button } from "../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 import { ApprovalKPIs } from "./components/ApprovalKPIs";
 import { ApprovalFilters } from "./components/ApprovalFilters";
 import { ApprovalQueueTable } from "./components/ApprovalQueueTable";

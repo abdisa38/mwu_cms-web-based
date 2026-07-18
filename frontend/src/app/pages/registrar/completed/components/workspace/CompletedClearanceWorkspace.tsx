@@ -7,7 +7,7 @@ import { CertificateCenterPanel } from "./CertificateCenterPanel";
 import { QRVerificationPanel } from "./QRVerificationPanel";
 import { ClearanceDocumentArchive } from "./ClearanceDocumentArchive";
 import { CompleteTimeline } from "./CompleteTimeline";
-import { Button } from "../../../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 
 // Modals
 import { CorrectionRequestModal } from "../modals/CorrectionRequestModal";

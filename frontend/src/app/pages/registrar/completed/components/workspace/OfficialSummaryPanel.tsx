@@ -1,6 +1,6 @@
 import { User, FileText, Calendar, Clock, MapPin } from "lucide-react";
 import { CompletedClearance } from "../../data/types";
-import { ImageWithFallback } from "../../../../../components/figma/ImageWithFallback";
+import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 
 export function OfficialSummaryPanel({ clearance }: { clearance: CompletedClearance }) {
   return (

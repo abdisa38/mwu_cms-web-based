@@ -1,6 +1,6 @@
 import { AlertCircle, HelpCircle, Send, ShieldAlert, RefreshCw } from "lucide-react";
 import { RejectedClearance } from "../../data/types";
-import { Button } from "../../../../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 
 interface AppealReviewPanelProps {
   clearance: RejectedClearance;

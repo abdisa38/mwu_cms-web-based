@@ -1,7 +1,7 @@
 import { ChevronDown, Download, Eye, Award, CheckCircle2, ShieldAlert, KeyRound, ShieldCheck } from "lucide-react";
 import { CompletedClearance, CertificateStatus } from "../data/types";
-import { ImageWithFallback } from "../../../../components/figma/ImageWithFallback";
-import { Button } from "../../../../components/ui/Button";
+import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
+import { Button } from "@/app/components/ui/Button";
 
 interface CompletedArchiveTableProps {
   data: CompletedClearance[];

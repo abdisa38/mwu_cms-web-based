@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Search, Download, HelpCircle, XCircle, Settings, RefreshCw } from "lucide-react";
-import { Button } from "../../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 import { RejectedKPIs } from "./components/RejectedKPIs";
 import { RejectedFilters } from "./components/RejectedFilters";
 import { RejectedArchiveTable } from "./components/RejectedArchiveTable";

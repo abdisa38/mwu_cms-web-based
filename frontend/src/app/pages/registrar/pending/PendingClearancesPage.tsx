@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { RefreshCw, Download, ChevronRight, Settings, HelpCircle, Clock, CheckSquare } from "lucide-react";
-import { Button } from "../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 import { PendingKPIs } from "./components/PendingKPIs";
 import { PendingFilters } from "./components/PendingFilters";
 import { PendingQueueTable } from "./components/PendingQueueTable";

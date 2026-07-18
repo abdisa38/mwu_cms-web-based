@@ -1,6 +1,6 @@
 import { X, Edit3, UploadCloud } from "lucide-react";
 import { CompletedClearance } from "../../data/types";
-import { Button } from "../../../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 
 export function CorrectionRequestModal({ clearance, onClose }: { clearance: CompletedClearance, onClose: () => void }) {
   return (

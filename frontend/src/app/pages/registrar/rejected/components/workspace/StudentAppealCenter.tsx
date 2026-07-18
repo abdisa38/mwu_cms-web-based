@@ -1,6 +1,6 @@
 import { MessageSquare, Calendar, User, FileText, Download, Eye } from "lucide-react";
 import { RejectedClearance } from "../../data/types";
-import { Button } from "../../../../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 
 export function StudentAppealCenter({ clearance }: { clearance: RejectedClearance }) {
   if (!clearance.appeal) {

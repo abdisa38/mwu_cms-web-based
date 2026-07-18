@@ -1,7 +1,7 @@
 import { Eye, ShieldAlert, Clock, AlertTriangle, AlertCircle, RefreshCw } from "lucide-react";
 import { RejectedClearance, RejectionStatus, PriorityLevel } from "../data/types";
-import { ImageWithFallback } from "../../../../../components/figma/ImageWithFallback";
-import { Button } from "../../../../../components/ui/Button";
+import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
+import { Button } from "@/app/components/ui/Button";
 
 interface RejectedArchiveTableProps {
   data: RejectedClearance[];

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Building2, Search, Filter, Download, HelpCircle, Archive, ShieldCheck, Settings } from "lucide-react";
-import { Button } from "../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 import { CompletedKPIs } from "./components/CompletedKPIs";
 import { CompletedFilters } from "./components/CompletedFilters";
 import { CompletedArchiveTable } from "./components/CompletedArchiveTable";

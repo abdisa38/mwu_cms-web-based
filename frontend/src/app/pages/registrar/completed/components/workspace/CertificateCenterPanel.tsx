@@ -1,8 +1,8 @@
 import { Download, Printer, Share2, ShieldAlert, Award, QrCode } from "lucide-react";
 import { CompletedClearance } from "../../data/types";
-import { Button } from "../../../../../components/ui/Button";
-import mwuLogo from "../../../../../../imports/download.jfif";
-import { ImageWithFallback } from "../../../../../components/figma/ImageWithFallback";
+import { Button } from "@/app/components/ui/Button";
+import mwuLogo from "@/imports/download.jfif";
+import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 
 export function CertificateCenterPanel({ clearance }: { clearance: CompletedClearance }) {
   if (clearance.certificate.status === "Revoked") {

@@ -1,5 +1,5 @@
 import { Building2, TrendingUp, TrendingDown, Minus } from "lucide-react";
-import { Button } from "../../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 
 export function DepartmentPerformanceTable() {
   const departments = [

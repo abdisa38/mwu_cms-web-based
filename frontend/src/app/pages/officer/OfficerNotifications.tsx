@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { Button } from "../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 import { 
   ChevronRight, 
   Search, 

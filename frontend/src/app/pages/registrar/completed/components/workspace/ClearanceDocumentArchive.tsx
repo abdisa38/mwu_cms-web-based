@@ -1,6 +1,6 @@
 import { FileText, Download, Eye, ExternalLink, CheckCircle, Search } from "lucide-react";
 import { CompletedClearance } from "../../data/types";
-import { Button } from "../../../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 
 export function ClearanceDocumentArchive({ clearance }: { clearance: CompletedClearance }) {
   if (clearance.documents.length === 0) {

@@ -1,5 +1,5 @@
 import { Search, Filter, Calendar } from "lucide-react";
-import { Button } from "../../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 
 export function VerificationFilters() {
   return (

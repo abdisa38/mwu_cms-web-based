@@ -1,5 +1,5 @@
 import { ShieldCheck, Check, X, Eye, Users } from "lucide-react";
-import { Button } from "../../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 
 export function StudentVerificationQueue() {
   const pendingStudents = [

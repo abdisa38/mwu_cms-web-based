@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { MoreVertical, ShieldAlert, AlertCircle, FileText, CheckCircle2, Clock, CheckSquare } from "lucide-react";
-import { Button } from "../../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 import { mockFinalApprovals } from "../data/mockFinalApprovalData";
 
 interface ApprovalQueueTableProps {

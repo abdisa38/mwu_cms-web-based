@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router";
-import { Button } from "../../components/ui/Button";
-import { Certificate } from "../../components/shared/Certificate";
+import { Button } from "@/app/components/ui/Button";
+import { Certificate } from "@/app/components/shared/Certificate";
 import { 
   ChevronRight, 
   Download, 

@@ -1,4 +1,4 @@
-import { Button } from "../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 import { 
   Search, 
   Filter, 

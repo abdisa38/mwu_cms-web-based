@@ -1,6 +1,6 @@
 import { Outlet, Link, useLocation } from "react-router";
-import { ImageWithFallback } from "../../components/figma/ImageWithFallback";
-import mwuLogo from "../../../imports/download.jfif";
+import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
+import mwuLogo from "@/imports/download.jfif";
 import { 
   Bell, 
   Search, 

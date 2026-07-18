@@ -1,5 +1,5 @@
 import { X, CheckCircle, Info } from "lucide-react";
-import { Button } from "../../../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 
 interface ApproveModalProps {
   onClose: () => void;

@@ -1,5 +1,5 @@
 import { FileText, MoreVertical, Eye, CheckCircle, XCircle } from "lucide-react";
-import { Button } from "../../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 
 export function RecentClearanceRequestsTable() {
   const requests = [

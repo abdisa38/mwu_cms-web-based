@@ -1,5 +1,5 @@
 import { X, HelpCircle } from "lucide-react";
-import { Button } from "../../../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 
 export function RequestInfoModal({ onClose }: { onClose: () => void }) {
   return (

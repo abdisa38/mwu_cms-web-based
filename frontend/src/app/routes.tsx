@@ -33,6 +33,7 @@ import { PendingClearancesPage } from "./pages/registrar/pending/PendingClearanc
 import { CompletedClearancesPage } from "./pages/registrar/completed/CompletedClearancesPage";
 import { RejectedClearancesPage } from "./pages/registrar/rejected/RejectedClearancesPage";
 import { VerifyCertificate } from "./pages/public/VerifyCertificate";
+import { FinalApprovalPage } from "./pages/registrar/final-approval/FinalApprovalPage";
 
 export const router = createBrowserRouter([
   {

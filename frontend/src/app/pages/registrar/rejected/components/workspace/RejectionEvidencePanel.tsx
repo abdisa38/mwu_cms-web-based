@@ -1,6 +1,6 @@
 import { FileText, Download, Eye, ExternalLink } from "lucide-react";
 import { RejectedClearance } from "../../data/types";
-import { Button } from "../../../../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 
 export function RejectionEvidencePanel({ clearance }: { clearance: RejectedClearance }) {
   if (clearance.evidence.length === 0) {

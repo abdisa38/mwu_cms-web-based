@@ -1,5 +1,5 @@
 import { X, Send } from "lucide-react";
-import { Button } from "../../../../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 import { RejectedClearance } from "../../data/types";
 
 interface Props {

@@ -1,6 +1,6 @@
 import { FileText, ShieldAlert, Clock, AlertTriangle, MessageSquare, CheckCircle2 } from "lucide-react";
 import { RejectedClearance } from "../../data/types";
-import { ImageWithFallback } from "../../../../../../components/figma/ImageWithFallback";
+import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 
 export function RejectionSummaryPanel({ clearance }: { clearance: RejectedClearance }) {
   return (

@@ -1,5 +1,5 @@
 import { Bell, AlertTriangle, ShieldAlert, Building2, MessageSquare, Megaphone } from "lucide-react";
-import { Button } from "../../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 
 export function LiveNotificationsCenter() {
   const notifications = [

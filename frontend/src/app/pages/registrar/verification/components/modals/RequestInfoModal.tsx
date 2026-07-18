@@ -1,5 +1,5 @@
 import { X, AlertCircle, FileText } from "lucide-react";
-import { Button } from "../../../../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 
 interface RequestInfoModalProps {
   onClose: () => void;

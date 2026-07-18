@@ -1,8 +1,8 @@
 import { Link, useNavigate } from "react-router";
-import { Button } from "../components/ui/Button";
-import { Input } from "../components/ui/Input";
-import { ImageWithFallback } from "../components/figma/ImageWithFallback";
-import mwuLogo from "../../imports/download.jfif";
+import { Button } from "@/app/components/ui/Button";
+import { Input } from "@/app/components/ui/Input";
+import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
+import mwuLogo from "@/imports/download.jfif";
 import { ArrowLeft, Building, User, Lock } from "lucide-react";
 import { useState } from "react";
 

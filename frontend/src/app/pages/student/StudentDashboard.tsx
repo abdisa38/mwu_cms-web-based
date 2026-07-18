@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import { Button } from "../../components/ui/Button";
+import { Button } from "@/app/components/ui/Button";
 import { 
   CheckCircle2, 
   Clock, 
