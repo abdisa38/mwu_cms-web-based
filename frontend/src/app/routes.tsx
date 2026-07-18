@@ -38,6 +38,7 @@ import { CertificatesPage } from "./pages/registrar/certificates/CertificatesPag
 import { StudentDatabasePage as RegistrarStudentDatabasePage } from "./pages/registrar/students/StudentDatabasePage";
 import { StaffDepartmentsPage } from "./pages/registrar/staff-departments/StaffDepartmentsPage";
 import { WorkflowConfigurationPage } from "./pages/registrar/workflow-configuration/WorkflowConfigurationPage";
+import { AuditLogsPage } from "./pages/registrar/audit-logs/AuditLogsPage";
 
 export const router = createBrowserRouter([
   {
@@ -90,14 +91,13 @@ export const router = createBrowserRouter([
       { path: "students", Component: RegistrarStudentDatabasePage },
       { path: "staff-departments", Component: StaffDepartmentsPage },
       { path: "workflow-configuration", Component: WorkflowConfigurationPage },
+      { path: "audit-logs", Component: AuditLogsPage },
       { path: "verification", Component: StudentVerificationPage },
       { path: "pending", Component: PendingClearancesPage },
       { path: "approvals", Component: FinalApprovalPage },
       { path: "completed", Component: CompletedClearancesPage },
       { path: "rejected", Component: RejectedClearancesPage },
       { path: "certificates", Component: CertificatesPage },
-      { path: "departments", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Departments</h1></div> },
-      { path: "audit-logs", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Audit Logs</h1></div> },
       { path: "reports", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Reports</h1></div> },
       { path: "messages", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Messages</h1></div> },
       { path: "settings", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">System Settings</h1></div> },
