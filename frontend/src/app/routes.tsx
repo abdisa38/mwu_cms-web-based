@@ -34,6 +34,7 @@ import { CompletedClearancesPage } from "./pages/registrar/completed/CompletedCl
 import { RejectedClearancesPage } from "./pages/registrar/rejected/RejectedClearancesPage";
 import { VerifyCertificate } from "./pages/public/VerifyCertificate";
 import { FinalApprovalPage } from "./pages/registrar/final-approval/FinalApprovalPage";
+import { CertificatesPage } from "./pages/registrar/certificates/CertificatesPage";
 
 export const router = createBrowserRouter([
   {
@@ -88,7 +89,7 @@ export const router = createBrowserRouter([
       { path: "approvals", Component: FinalApprovalPage },
       { path: "completed", Component: CompletedClearancesPage },
       { path: "rejected", Component: RejectedClearancesPage },
-      { path: "certificates", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Certificates</h1></div> },
+      { path: "certificates", Component: CertificatesPage },
       { path: "departments", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Departments</h1></div> },
       { path: "audit-logs", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Audit Logs</h1></div> },
       { path: "reports", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Reports</h1></div> },
