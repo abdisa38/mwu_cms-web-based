@@ -39,6 +39,7 @@ import { StudentDatabasePage as RegistrarStudentDatabasePage } from "./pages/reg
 import { StaffDepartmentsPage } from "./pages/registrar/staff-departments/StaffDepartmentsPage";
 import { WorkflowConfigurationPage } from "./pages/registrar/workflow-configuration/WorkflowConfigurationPage";
 import { AuditLogsPage } from "./pages/registrar/audit-logs/AuditLogsPage";
+import { RegistrarSettingsPage } from "./pages/registrar/settings/RegistrarSettingsPage";
 
 export const router = createBrowserRouter([
   {
@@ -101,7 +102,7 @@ export const router = createBrowserRouter([
       { path: "certificates", Component: CertificatesPage },
       { path: "reports", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Reports</h1></div> },
       { path: "messages", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Messages</h1></div> },
-      { path: "settings", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">System Settings</h1></div> },
+      { path: "settings", Component: RegistrarSettingsPage },
     ]
   }
 ]);
