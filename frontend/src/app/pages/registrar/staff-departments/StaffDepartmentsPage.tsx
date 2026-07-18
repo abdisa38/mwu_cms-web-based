@@ -8,6 +8,9 @@ import { AccessRequestsTable } from "./components/AccessRequestsTable";
 import { mockStaff, mockDepartments, mockPermissionMatrix, mockAccessRequests } from "./data/mockData";
 import { StaffRecord } from "./data/types";
 import { Users, Building2, Shield, Key } from "lucide-react";
+import { AddStaffModal } from "./components/modals/AddStaffModal";
+import { AddDepartmentModal } from "./components/modals/AddDepartmentModal";
+import { StaffProfileWorkspace } from "./components/workspace/StaffProfileWorkspace";
 
 export function StaffDepartmentsPage() {
   const [activeTab, setActiveTab] = useState("staff");
@@ -15,6 +18,9 @@ export function StaffDepartmentsPage() {
   const [selectedStatus, setSelectedStatus] = useState("All");
 
   const [selectedStaff, setSelectedStaff] = useState<StaffRecord | null>(null);
+  
+  const [isAddStaffOpen, setIsAddStaffOpen] = useState(false);
+  const [isAddDeptOpen, setIsAddDeptOpen] = useState(false);
 
   const tabs = [
     { id: "staff", label: "Staff Directory", icon: Users },
@@ -80,8 +86,8 @@ export function StaffDepartmentsPage() {
               setSearchQuery={setSearchQuery}
               selectedStatus={selectedStatus}
               setSelectedStatus={setSelectedStatus}
-              onAddStaff={() => {}}
-              onAddDepartment={() => {}}
+              onAddStaff={() => setIsAddStaffOpen(true)}
+              onAddDepartment={() => setIsAddDeptOpen(true)}
             />
             <StaffTable 
               staff={mockStaff} 
@@ -108,6 +114,17 @@ export function StaffDepartmentsPage() {
           </div>
         )}
       </div>
+
+      <AddStaffModal isOpen={isAddStaffOpen} onClose={() => setIsAddStaffOpen(false)} />
+      <AddDepartmentModal isOpen={isAddDeptOpen} onClose={() => setIsAddDeptOpen(false)} />
+      
+      {selectedStaff && (
+        <StaffProfileWorkspace 
+          staff={selectedStaff} 
+          onClose={() => setSelectedStaff(null)} 
+          onSuspend={() => {}}
+        />
+      )}
 
     </div>
   );
