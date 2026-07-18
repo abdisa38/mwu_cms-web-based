@@ -9,11 +9,13 @@ import { SecurityEventsTable } from "./components/SecurityEventsTable";
 import { RetentionSettingsView } from "./components/RetentionSettingsView";
 import { AuditEvent } from "./data/types";
 import { AuditDetailsWorkspace } from "./components/workspace/AuditDetailsWorkspace";
+import { ExportLogsModal } from "./components/modals/ExportLogsModal";
 import { Button } from "@/app/components/ui/Button";
 
 export function AuditLogsPage() {
   const [activeTab, setActiveTab] = useState("activity");
   const [selectedEvent, setSelectedEvent] = useState<AuditEvent | null>(null);
+  const [isExportModalOpen, setIsExportModalOpen] = useState(false);
 
   return (
     <div className="p-8 max-w-[1600px] mx-auto">
@@ -28,7 +30,7 @@ export function AuditLogsPage() {
           <Button variant="outline" className="bg-white gap-2">
             <RefreshCw className="w-4 h-4" /> Refresh
           </Button>
-          <Button variant="primary" className="gap-2">
+          <Button variant="primary" className="gap-2" onClick={() => setIsExportModalOpen(true)}>
             <Download className="w-4 h-4" /> Export Logs
           </Button>
         </div>
@@ -109,6 +111,17 @@ export function AuditLogsPage() {
         <AuditDetailsWorkspace 
           event={selectedEvent} 
           onClose={() => setSelectedEvent(null)} 
+        />
+      )}
+
+      {/* Export Modal */}
+      {isExportModalOpen && (
+        <ExportLogsModal 
+          onClose={() => setIsExportModalOpen(false)}
+          onExport={() => {
+            setIsExportModalOpen(false);
+            // Show toast or trigger download here
+          }}
         />
       )}
 
