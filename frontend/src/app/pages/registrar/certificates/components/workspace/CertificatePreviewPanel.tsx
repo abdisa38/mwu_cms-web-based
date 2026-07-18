@@ -53,9 +53,22 @@ export function CertificatePreviewPanel({ certificate }: CertificatePreviewPanel
           </ul>
         </div>
 
-        <Button className="bg-blue-600 hover:bg-blue-700 text-white px-8 h-12 text-lg shadow-md">
+        <Button 
+          className="bg-blue-600 hover:bg-blue-700 text-white px-8 h-12 text-lg shadow-md"
+          onClick={() => setIsGenerateOpen(true)}
+        >
           Generate Official Certificate
         </Button>
+
+        <GenerateCertificateModal 
+          certificate={certificate} 
+          isOpen={isGenerateOpen} 
+          onClose={() => setIsGenerateOpen(false)} 
+          onGenerate={(cert) => {
+            console.log("Generated:", cert);
+            // In a real app, you would update the global state or refetch here
+          }}
+        />
       </div>
     );
   }
@@ -134,18 +147,46 @@ export function CertificatePreviewPanel({ certificate }: CertificatePreviewPanel
         
         {/* Quick Actions */}
         <div className="space-y-3">
-          <Button variant="outline" className="w-full justify-start text-slate-600 bg-white">
+          <Button variant="outline" className="w-full justify-start text-slate-600 bg-white" onClick={() => setIsCorrectionOpen(true)}>
             Request Correction
           </Button>
-          <Button variant="outline" className="w-full justify-start text-slate-600 bg-white">
+          <Button variant="outline" className="w-full justify-start text-slate-600 bg-white" onClick={() => setIsRegenerateOpen(true)}>
             Regenerate Certificate
           </Button>
-          <Button variant="outline" className="w-full justify-start text-red-600 border-red-200 hover:bg-red-50 bg-white">
+          <Button variant="outline" className="w-full justify-start text-red-600 border-red-200 hover:bg-red-50 bg-white" onClick={() => setIsRevokeOpen(true)}>
             Revoke Certificate
           </Button>
         </div>
 
       </div>
+
+      {/* Modals */}
+      <RequestCorrectionModal 
+        certificate={certificate}
+        isOpen={isCorrectionOpen}
+        onClose={() => setIsCorrectionOpen(false)}
+        onRequest={() => {
+          console.log("Correction requested");
+        }}
+      />
+      
+      <RegenerateCertificateModal 
+        certificate={certificate}
+        isOpen={isRegenerateOpen}
+        onClose={() => setIsRegenerateOpen(false)}
+        onRegenerate={() => {
+          console.log("Certificate regenerated");
+        }}
+      />
+
+      <RevokeCertificateModal 
+        certificate={certificate}
+        isOpen={isRevokeOpen}
+        onClose={() => setIsRevokeOpen(false)}
+        onRevoke={() => {
+          console.log("Certificate revoked");
+        }}
+      />
     </div>
   );
 }
