@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 
 // Import Routes
 import authRoutes from './modules/auth/auth.routes';
+import clearanceRoutes from './modules/clearance/clearance.routes';
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(morgan('dev'));
 
 // API Routes
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/clearance', clearanceRoutes);
 
 // Health Check
 app.get('/health', (req: Request, res: Response) => {
