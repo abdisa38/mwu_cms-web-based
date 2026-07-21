@@ -8,6 +8,7 @@ export enum WorkflowStageStatus {
 }
 
 export interface IWorkflowStage {
+  _id?: mongoose.Types.ObjectId;
   departmentId: mongoose.Types.ObjectId; // E.g., Library, Cafe, Faculty
   order: number;
   status: WorkflowStageStatus;

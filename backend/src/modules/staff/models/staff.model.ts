@@ -24,6 +24,7 @@ const StaffSchema = new Schema<IStaff>({
 }, { timestamps: true });
 
 StaffSchema.pre(/^find/, function(next) {
+  // @ts-ignore
   this.where({ isDeleted: { $ne: true } });
   next();
 });

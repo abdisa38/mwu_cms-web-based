@@ -36,4 +36,8 @@ export class ClearanceRepository {
     });
     return !!active;
   }
+
+  public async count(filters: any = {}): Promise<number> {
+    return Clearance.countDocuments(filters);
+  }
 }

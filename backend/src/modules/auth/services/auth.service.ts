@@ -53,7 +53,7 @@ export class AuthService {
       expiresAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
     });
 
-    const payload = { userId: user.id, roleId: user.roleId.toString() };
+    const payload = { userId: user._id, roleId: user.roleId.toString() };
     const accessToken = generateAccessToken(payload);
     const refreshTokenPlain = generateRandomToken(40);
     const familyId = generateRandomToken(16);
@@ -92,7 +92,7 @@ export class AuthService {
     const user = await this.repository.findUserById(tokenDoc.userId.toString());
     if (!user || user.status !== 'ACTIVE') throw new UnauthorizedError('User inactive');
 
-    const payload = { userId: user.id, roleId: user.roleId.toString() };
+    const payload = { userId: user._id, roleId: user.roleId.toString() };
     const accessToken = generateAccessToken(payload);
 
     await this.repository.createRefreshToken({
