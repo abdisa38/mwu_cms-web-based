@@ -40,7 +40,7 @@ export class AuthController {
             email: result.user.email,
             firstName: result.user.firstName,
             lastName: result.user.lastName,
-            role: result.user.roleId
+            role: (result.user.roleId as any)?.slug?.toUpperCase() || 'STUDENT'
           }
         }
       });
