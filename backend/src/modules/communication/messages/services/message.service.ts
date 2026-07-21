@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 export class MessageService {
 
   public async getOrCreateConversation(participants: string[], clearanceId?: string): Promise<IConversation> {
-    const participantIds = participants.map(p => new mongoose.Types.ObjectId(p));
+    const participantIds = participants.map((p: any) => new mongoose.Types.ObjectId(p));
 
     let conv = await Conversation.findOne({
       participants: { $all: participantIds, $size: participantIds.length }
@@ -37,7 +37,7 @@ export class MessageService {
     const conversation = await Conversation.findById(conversationId);
     if (!conversation) throw new NotFoundError('Conversation not found');
 
-    if (!conversation.participants.some(p => p.toString() === senderId)) {
+    if (!conversation.participants.some((p: any) => p.toString() === senderId)) {
       throw new ForbiddenError('You are not a participant in this conversation');
     }
 
@@ -55,7 +55,7 @@ export class MessageService {
     await conversation.save();
 
     // Broadcast to other participants
-    conversation.participants.forEach(p => {
+    conversation.participants.forEach((p: any) => {
       const pId = p.toString();
       if (pId !== senderId) {
         socketManager.sendToUser(pId, 'message:new', message);
@@ -67,7 +67,7 @@ export class MessageService {
 
   public async getMessages(conversationId: string, userId: string, skip = 0, limit = 50) {
     const conversation = await Conversation.findById(conversationId);
-    if (!conversation || !conversation.participants.some(p => p.toString() === userId)) {
+    if (!conversation || !conversation.participants.some((p: any) => p.toString() === userId)) {
       throw new ForbiddenError('Not authorized');
     }
 
@@ -86,7 +86,7 @@ export class MessageService {
     
     // In a real app we'd fetch the exact messages to emit 'message:read', but emitting a general event works too
     const conversation = await Conversation.findById(conversationId);
-    conversation?.participants.forEach(p => {
+    conversation?.participants.forEach((p: any) => {
       socketManager.sendToUser(p.toString(), 'conversation:read', { conversationId, readerId: userId });
     });
   }
