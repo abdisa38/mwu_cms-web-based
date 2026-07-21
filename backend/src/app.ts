@@ -4,8 +4,8 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 
-// Import Routes (To be implemented)
-// import authRoutes from './modules/auth/auth.routes';
+// Import Routes
+import authRoutes from './modules/auth/auth.routes';
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.use(helmet());
 app.use(morgan('dev'));
 
 // API Routes
-// app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/auth', authRoutes);
 
 // Health Check
 app.get('/health', (req: Request, res: Response) => {
