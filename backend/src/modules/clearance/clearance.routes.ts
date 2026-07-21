@@ -1,28 +1,22 @@
 import { Router } from 'express';
-import { protect, restrictTo } from '../../middlewares/auth.middleware';
-import { UserRole } from '../users/user.model';
-import {
-  initiateClearance,
-  getMyClearance,
-  getPendingClearances,
-  approveDepartmentClearance,
-  grantFinalApproval
-} from './clearance.controller';
+import { ClearanceController } from './clearance.controller';
+import { authenticate } from '../../middlewares/auth.middleware';
 
 const router = Router();
+const clearanceController = new ClearanceController();
 
-// Protect all clearance routes
-router.use(protect);
+router.use(authenticate);
 
-// Student Routes
-router.post('/initiate', restrictTo(UserRole.STUDENT), initiateClearance);
-router.get('/my-clearance', restrictTo(UserRole.STUDENT), getMyClearance);
+// Student/General Routes
+router.post('/', clearanceController.create);
+router.get('/my', clearanceController.getMyClearances);
 
-// Officer Routes
-router.get('/pending', restrictTo(UserRole.OFFICER), getPendingClearances);
-router.patch('/:id/approve-dept', restrictTo(UserRole.OFFICER), approveDepartmentClearance);
+// Registrar/Admin Routes
+router.get('/search', clearanceController.search);
 
-// Registrar Routes
-router.patch('/:id/final-approve', restrictTo(UserRole.REGISTRAR, UserRole.ADMIN), grantFinalApproval);
+// Shared specific routes
+router.get('/:id', clearanceController.getById);
+router.get('/:id/timeline', clearanceController.getTimeline);
+router.patch('/:id/cancel', clearanceController.cancel);
 
 export default router;
