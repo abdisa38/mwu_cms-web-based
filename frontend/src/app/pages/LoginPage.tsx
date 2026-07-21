@@ -1,23 +1,41 @@
 import { Link, useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
 import { Button } from "@/app/components/ui/Button";
 import { Input } from "@/app/components/ui/Input";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import mwuLogo from "@/imports/download.jfif";
 import { ArrowLeft, Building, User, Lock } from "lucide-react";
 import { useState } from "react";
+import { useLoginMutation } from "@/api/authApi";
+import { setCredentials } from "@/store/slices/authSlice";
+import { toast } from "sonner";
 
 export function LoginPage() {
-  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
+  const [login, { isLoading }] = useLoginMutation();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      navigate("/student");
-    }, 1000);
+    try {
+      const response = await login({ email, password }).unwrap();
+      dispatch(setCredentials({ user: response.data.user, token: response.token }));
+      
+      toast.success("Login successful!");
+      
+      // Redirect based on role
+      const role = response.data.user.role;
+      if (role === 'STUDENT') navigate("/student");
+      else if (role === 'REGISTRAR') navigate("/registrar");
+      else navigate("/officer");
+      
+    } catch (err: any) {
+      toast.error(err.data?.message || "Login failed. Please check your credentials.");
+    }
   };
 
   return (
@@ -67,7 +85,10 @@ export function LoginPage() {
               </label>
               <Input 
                 id="studentId" 
-                placeholder="e.g. UGR/1234/12" 
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="email@example.com" 
                 required 
                 className="h-12 text-base"
               />
@@ -86,6 +107,8 @@ export function LoginPage() {
                 <Input 
                   id="password" 
                   type={showPassword ? "text" : "password"} 
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••" 
                   required 
                   className="h-12 text-base pr-10"
@@ -107,7 +130,7 @@ export function LoginPage() {
               </label>
             </div>
 
-            <Button type="submit" className="w-full h-12 text-base mt-6" isLoading={loading}>
+            <Button type="submit" className="w-full h-12 text-base mt-6" isLoading={isLoading}>
               Sign In
             </Button>
           </form>
