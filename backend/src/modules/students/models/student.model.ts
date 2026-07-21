@@ -29,7 +29,7 @@ const StudentSchema = new Schema<IStudent>({
 }, { timestamps: true });
 
 // Prevent finding soft-deleted students by default
-StudentSchema.pre(/^find/, function(next) {
+StudentSchema.pre(/^find/, function(next: any) {
   // @ts-ignore
   this.where({ isDeleted: { $ne: true } });
   next();

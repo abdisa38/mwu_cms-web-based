@@ -62,7 +62,7 @@ export class WorkflowService {
     }
 
     // Update the specific stage
-    await this.repository.updateStageStatus(workflowId, currentStage._id.toString(), nextStatus, staffUserId, remarks);
+    await this.repository.updateStageStatus(workflowId, currentStage._id!.toString(), nextStatus, staffUserId, remarks);
 
     // If approved, move to next stage or complete workflow
     if (action === 'APPROVE') {

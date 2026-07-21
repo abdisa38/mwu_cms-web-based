@@ -23,7 +23,7 @@ const StaffSchema = new Schema<IStaff>({
   isDeleted: { type: Boolean, default: false }
 }, { timestamps: true });
 
-StaffSchema.pre(/^find/, function(next) {
+StaffSchema.pre(/^find/, function(next: any) {
   // @ts-ignore
   this.where({ isDeleted: { $ne: true } });
   next();
