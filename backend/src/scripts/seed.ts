@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import User, { UserRole } from '../modules/users/user.model';
-import Department from '../modules/departments/department.model';
-import Staff from '../modules/staff/staff.model';
-import Student, { AcademicStatus } from '../modules/students/student.model';
+import bcrypt from 'bcryptjs';
+import Role from '../modules/auth/models/role.model';
+import User from '../modules/auth/models/user.model';
+import Department from '../modules/academic/models/department.model';
 
 dotenv.config();
 
@@ -11,69 +11,96 @@ const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/mwu_cms';
 
 const seedDatabase = async () => {
   try {
-    console.log('Connecting to MongoDB...');
+    console.log('⏳ Connecting to MongoDB...');
     await mongoose.connect(MONGO_URI);
-    console.log('Connected!');
+    console.log('✅ Connected to MongoDB!');
 
-    console.log('Clearing existing data...');
+    // 1. Clear existing core data
+    console.log('⏳ Clearing old data...');
+    await Role.deleteMany({});
     await User.deleteMany({});
     await Department.deleteMany({});
-    await Staff.deleteMany({});
-    await Student.deleteMany({});
 
-    console.log('Creating Departments...');
-    const libDept = await Department.create({ name: 'Library', code: 'LIB', faculty: 'University-wide' });
-    const finDept = await Department.create({ name: 'Finance', code: 'FIN', faculty: 'University-wide' });
-    const regDept = await Department.create({ name: 'Registrar', code: 'REG', faculty: 'University-wide' });
+    // 2. Create Roles
+    console.log('⏳ Creating Roles...');
+    const roles = await Role.insertMany([
+      { name: 'Student', slug: 'student', priority: 1, permissions: ['clearance:create', 'clearance:read'], isSystemRole: true },
+      { name: 'Officer', slug: 'officer', priority: 2, permissions: ['clearance:read', 'clearance:approve', 'clearance:reject'], isSystemRole: true },
+      { name: 'Department Head', slug: 'department_head', priority: 3, permissions: ['clearance:read', 'clearance:approve', 'clearance:reject'], isSystemRole: true },
+      { name: 'Registrar', slug: 'registrar', priority: 4, permissions: ['clearance:read', 'clearance:approve', 'certificate:generate'], isSystemRole: true },
+      { name: 'Super Admin', slug: 'super_admin', priority: 5, permissions: ['*'], isSystemRole: true },
+      { name: 'Admin', slug: 'admin', priority: 5, permissions: ['*'], isSystemRole: true },
+    ]);
 
-    console.log('Creating Users & Profiles...');
+    const studentRole = roles.find(r => r.slug === 'student');
+    const adminRole = roles.find(r => r.slug === 'super_admin');
+    const registrarRole = roles.find(r => r.slug === 'registrar');
+    const officerRole = roles.find(r => r.slug === 'officer');
 
-    // 1. Registrar User
-    const registrarUser = await User.create({
-      email: 'admin.registrar@mwu.edu',
-      password: 'password123',
-      role: UserRole.REGISTRAR
-    });
-    console.log(`Created Registrar: ${registrarUser.email}`);
+    // 3. Create Departments
+    console.log('⏳ Creating Departments...');
+    const depts = await Department.insertMany([
+      { name: 'Computer Science', code: 'CS', facultyId: new mongoose.Types.ObjectId() },
+      { name: 'Library', code: 'LIB', facultyId: new mongoose.Types.ObjectId() },
+      { name: 'Sports', code: 'SPT', facultyId: new mongoose.Types.ObjectId() },
+    ]);
 
-    // 2. Officer User (Library)
-    const officerUser = await User.create({
-      email: 'library.officer@mwu.edu',
-      password: 'password123',
-      role: UserRole.OFFICER
-    });
+    // 4. Create Users
+    console.log('⏳ Creating Users...');
+    const passwordHash = await bcrypt.hash('password123', 12);
+
+    await User.insertMany([
+      {
+        firstName: 'Super',
+        lastName: 'Admin',
+        email: 'admin@mwu.edu.et',
+        passwordHash,
+        roleId: adminRole?._id,
+        status: 'ACTIVE',
+        isEmailVerified: true
+      },
+      {
+        firstName: 'Abebe',
+        lastName: 'Kebede',
+        email: 'abebe@mwu.edu.et',
+        studentId: 'MWU/1234/12',
+        passwordHash,
+        roleId: studentRole?._id,
+        departmentId: depts[0]._id,
+        status: 'ACTIVE',
+        isEmailVerified: true
+      },
+      {
+        firstName: 'Registrar',
+        lastName: 'Office',
+        email: 'registrar@mwu.edu.et',
+        passwordHash,
+        roleId: registrarRole?._id,
+        status: 'ACTIVE',
+        isEmailVerified: true
+      },
+      {
+        firstName: 'Library',
+        lastName: 'Officer',
+        email: 'library@mwu.edu.et',
+        passwordHash,
+        roleId: officerRole?._id,
+        departmentId: depts[1]._id,
+        status: 'ACTIVE',
+        isEmailVerified: true
+      }
+    ]);
+
+    console.log('🎉 Database Seeded Successfully!');
+    console.log('\n--- Default Credentials ---');
+    console.log('Admin: admin@mwu.edu.et / password123');
+    console.log('Registrar: registrar@mwu.edu.et / password123');
+    console.log('Staff (Library): library@mwu.edu.et / password123');
+    console.log('Student: abebe@mwu.edu.et (or MWU/1234/12) / password123');
     
-    await Staff.create({
-      user: officerUser._id,
-      firstName: 'Alemayehu',
-      lastName: 'Kebede',
-      department: libDept._id,
-      title: 'Chief Librarian'
-    });
-    console.log(`Created Library Officer: ${officerUser.email}`);
-
-    // 3. Student User
-    const studentUser = await User.create({
-      email: 'student@mwu.edu',
-      password: 'password123',
-      role: UserRole.STUDENT
-    });
-
-    await Student.create({
-      user: studentUser._id,
-      studentId: 'UGR/1234/12',
-      firstName: 'Abebe',
-      lastName: 'Bikila',
-      department: regDept._id, // Assume they belong to a general dept for now
-      enrollmentYear: 2020,
-      academicStatus: AcademicStatus.ACTIVE
-    });
-    console.log(`Created Student: ${studentUser.email} (UGR/1234/12)`);
-
-    console.log('✅ Database seeded successfully!');
     process.exit(0);
   } catch (error) {
-    console.error('❌ Seeding failed:', error);
+    console.error('❌ Error seeding database:', error);
     process.exit(1);
   }
 };
