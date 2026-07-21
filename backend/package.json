@@ -25,8 +25,10 @@
     "morgan": "^1.11.0",
     "multer": "^2.2.0",
     "multer-storage-cloudinary": "^4.0.0",
+    "nodemailer": "^9.0.3",
     "pdfkit": "^0.19.1",
     "qrcode": "^1.5.4",
+    "socket.io": "^4.8.3",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -39,6 +41,7 @@
     "@types/morgan": "^1.9.10",
     "@types/multer": "^2.2.0",
     "@types/node": "^26.1.1",
+    "@types/nodemailer": "^8.0.1",
     "@types/pdfkit": "^0.17.6",
     "@types/qrcode": "^1.5.6",
     "nodemon": "^3.1.14",

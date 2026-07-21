@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { DocumentController } from './document.controller';
 import { authenticate, authorize } from '../../middlewares/auth.middleware';
 import { uploadMiddleware } from '../../middlewares/upload.middleware';
-import { UserRole } from '../auth/models/user.model';
+import { UserRole } from '../users/user.model';
 
 const router = Router();
 const documentController = new DocumentController();

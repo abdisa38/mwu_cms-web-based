@@ -47,7 +47,7 @@ export class CertificateController {
       const ip = req.ip;
       const userAgent = req.headers['user-agent'];
       
-      const result = await certificateService.verifyCertificate(req.params.certificateNumber, ip, userAgent);
+      const result = await certificateService.verifyCertificate(req.params.certificateNumber as string, ip, userAgent);
       res.status(200).json({ success: true, data: result });
     } catch (error) {
       next(error);

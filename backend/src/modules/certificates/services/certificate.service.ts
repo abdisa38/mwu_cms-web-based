@@ -86,7 +86,7 @@ export class CertificateService {
     }
 
     // Log the successful verification scan
-    await this.repository.logVerification(cert._id as string, true, ipAddress, userAgent);
+    await this.repository.logVerification(cert._id as unknown as string, true, ipAddress, userAgent);
 
     return {
       isValid: true,

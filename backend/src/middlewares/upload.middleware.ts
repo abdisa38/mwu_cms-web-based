@@ -7,7 +7,7 @@ const storage = new CloudinaryStorage({
   params: {
     folder: 'mwu_clearance_documents',
     allowed_formats: ['jpg', 'jpeg', 'png', 'pdf'],
-    public_id: (req, file) => {
+    public_id: (req: any, file: Express.Multer.File) => {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
       return `${file.fieldname}-${uniqueSuffix}`;
     }

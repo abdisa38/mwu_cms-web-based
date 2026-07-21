@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { CertificateController } from './certificate.controller';
 import { authenticate, authorize } from '../../middlewares/auth.middleware';
-import { UserRole } from '../auth/models/user.model';
+import { UserRole } from '../users/user.model';
 
 const router = Router();
 const certificateController = new CertificateController();
