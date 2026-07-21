@@ -51,43 +51,42 @@ const seedDatabase = async () => {
 
     await User.insertMany([
       {
+        userId: 'EMP-001',
         firstName: 'Super',
         lastName: 'Admin',
         email: 'admin@mwu.edu.et',
         passwordHash,
         roleId: adminRole?._id,
-        status: 'ACTIVE',
-        isEmailVerified: true
+        status: 'ACTIVE'
       },
       {
+        userId: 'MWU/1234/12',
         firstName: 'Abebe',
         lastName: 'Kebede',
         email: 'abebe@mwu.edu.et',
-        studentId: 'MWU/1234/12',
         passwordHash,
         roleId: studentRole?._id,
         departmentId: depts[0]._id,
-        status: 'ACTIVE',
-        isEmailVerified: true
+        status: 'ACTIVE'
       },
       {
+        userId: 'EMP-002',
         firstName: 'Registrar',
         lastName: 'Office',
         email: 'registrar@mwu.edu.et',
         passwordHash,
         roleId: registrarRole?._id,
-        status: 'ACTIVE',
-        isEmailVerified: true
+        status: 'ACTIVE'
       },
       {
+        userId: 'EMP-003',
         firstName: 'Library',
         lastName: 'Officer',
         email: 'library@mwu.edu.et',
         passwordHash,
         roleId: officerRole?._id,
         departmentId: depts[1]._id,
-        status: 'ACTIVE',
-        isEmailVerified: true
+        status: 'ACTIVE'
       }
     ]);
 
