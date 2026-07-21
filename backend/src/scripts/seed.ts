@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import bcrypt from 'bcryptjs';
 import Role from '../modules/auth/models/role.model';
 import User from '../modules/auth/models/user.model';
-import Department from '../modules/academic/models/department.model';
+import Department from '../modules/departments/department.model';
 
 dotenv.config();
 
