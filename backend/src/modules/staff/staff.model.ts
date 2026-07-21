@@ -41,4 +41,4 @@ const StaffSchema: Schema = new Schema({
   }
 }, { timestamps: true });
 
-export default mongoose.model<IStaff>('Staff', StaffSchema);
+export default mongoose.models. || mongoose.model<>('',);

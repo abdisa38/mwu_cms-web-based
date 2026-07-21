@@ -41,4 +41,4 @@ const NotificationSchema = new Schema<INotification>({
   isArchived: { type: Boolean, default: false }
 }, { timestamps: true });
 
-export default mongoose.model<INotification>('Notification', NotificationSchema);
+export default mongoose.models. || mongoose.model<>('',);

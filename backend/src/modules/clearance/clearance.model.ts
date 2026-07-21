@@ -59,4 +59,4 @@ const ClearanceSchema: Schema = new Schema({
   }
 }, { timestamps: true });
 
-export default mongoose.model<IClearance>('Clearance', ClearanceSchema);
+export default mongoose.models. || mongoose.model<>('',);

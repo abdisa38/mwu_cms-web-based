@@ -16,4 +16,4 @@ const CertificateVerificationSchema = new Schema<ICertificateVerification>({
   isValid: { type: Boolean, required: true }
 }, { timestamps: true });
 
-export default mongoose.model<ICertificateVerification>('CertificateVerification', CertificateVerificationSchema);
+export default mongoose.models. || mongoose.model<>('',);

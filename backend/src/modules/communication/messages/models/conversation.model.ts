@@ -18,4 +18,4 @@ const ConversationSchema = new Schema<IConversation>({
 // Ensure we can query fast by participant
 ConversationSchema.index({ participants: 1 });
 
-export default mongoose.model<IConversation>('Conversation', ConversationSchema);
+export default mongoose.models. || mongoose.model<>('',);

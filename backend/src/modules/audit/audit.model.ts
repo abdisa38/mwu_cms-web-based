@@ -34,4 +34,4 @@ const AuditLogSchema: Schema = new Schema({
   }
 }, { timestamps: true }); // Automatically creates createdAt timestamp
 
-export default mongoose.model<IAuditLog>('AuditLog', AuditLogSchema);
+export default mongoose.models. || mongoose.model<>('',);

@@ -52,4 +52,4 @@ DocumentSchema.pre<mongoose.Query<any, any>>(/^find/, function(next: any) {
   next();
 });
 
-export default mongoose.model<IDoc>('Document', DocumentSchema);
+export default mongoose.models. || mongoose.model<>('',);

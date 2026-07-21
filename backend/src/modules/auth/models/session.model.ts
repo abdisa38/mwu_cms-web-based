@@ -29,4 +29,4 @@ const SessionSchema = new Schema<ISession>({
 // TTL index to automatically delete expired sessions
 SessionSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
-export default mongoose.model<ISession>('Session', SessionSchema);
+export default mongoose.models. || mongoose.model<>('',);

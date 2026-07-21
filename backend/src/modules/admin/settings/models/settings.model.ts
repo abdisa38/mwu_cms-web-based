@@ -30,4 +30,4 @@ const SystemSettingsSchema = new Schema<ISystemSettings>({
   updatedBy: { type: Schema.Types.ObjectId, ref: 'User' }
 }, { timestamps: true });
 
-export default mongoose.model<ISystemSettings>('SystemSettings', SystemSettingsSchema);
+export default mongoose.models. || mongoose.model<>('',);

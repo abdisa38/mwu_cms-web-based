@@ -31,4 +31,4 @@ const AppealSchema = new Schema<IAppeal>({
   reviewedAt: { type: Date }
 }, { timestamps: true });
 
-export default mongoose.model<IAppeal>('Appeal', AppealSchema);
+export default mongoose.models. || mongoose.model<>('',);

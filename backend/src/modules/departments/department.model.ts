@@ -32,4 +32,4 @@ const DepartmentSchema: Schema = new Schema({
   }
 }, { timestamps: true });
 
-export default mongoose.model<IDepartment>('Department', DepartmentSchema);
+export default mongoose.models. || mongoose.model<>('',);

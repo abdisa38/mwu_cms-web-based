@@ -34,4 +34,4 @@ const EmailQueueSchema = new Schema<IEmailQueue>({
 // Index for the worker to find pending emails fast
 EmailQueueSchema.index({ status: 1, scheduledFor: 1 });
 
-export default mongoose.model<IEmailQueue>('EmailQueue', EmailQueueSchema);
+export default mongoose.models. || mongoose.model<>('',);

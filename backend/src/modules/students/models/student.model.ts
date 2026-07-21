@@ -35,4 +35,4 @@ StudentSchema.pre(/^find/, function(next: any) {
   next();
 });
 
-export default mongoose.model<IStudent>('Student', StudentSchema);
+export default mongoose.models. || mongoose.model<>('',);

@@ -16,4 +16,4 @@ const FacultySchema = new Schema<IFaculty>({
   logoUrl: { type: String }
 }, { timestamps: true });
 
-export default mongoose.model<IFaculty>('Faculty', FacultySchema);
+export default mongoose.models. || mongoose.model<>('',);

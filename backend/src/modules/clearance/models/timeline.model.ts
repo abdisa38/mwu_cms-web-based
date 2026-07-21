@@ -28,4 +28,4 @@ const TimelineSchema = new Schema<ITimeline>({
   comment: { type: String }
 }, { timestamps: true });
 
-export default mongoose.model<ITimeline>('Timeline', TimelineSchema);
+export default mongoose.models. || mongoose.model<>('',);

@@ -20,4 +20,4 @@ const DepartmentSchema = new Schema<IDepartment>({
   logoUrl: { type: String }
 }, { timestamps: true });
 
-export default mongoose.model<IDepartment>('Department', DepartmentSchema);
+export default mongoose.models. || mongoose.model<>('',);

@@ -27,4 +27,4 @@ const ProgramSchema = new Schema<IProgram>({
   isActive: { type: Boolean, default: true }
 }, { timestamps: true });
 
-export default mongoose.model<IProgram>('Program', ProgramSchema);
+export default mongoose.models. || mongoose.model<>('',);
