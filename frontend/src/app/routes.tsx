@@ -40,6 +40,7 @@ import { StaffDepartmentsPage } from "./pages/registrar/staff-departments/StaffD
 import { WorkflowConfigurationPage } from "./pages/registrar/workflow-configuration/WorkflowConfigurationPage";
 import { AuditLogsPage } from "./pages/registrar/audit-logs/AuditLogsPage";
 import { RegistrarSettingsPage } from "./pages/registrar/settings/RegistrarSettingsPage";
+import { ProtectedRoute } from "./components/auth/ProtectedRoute";
 
 export const router = createBrowserRouter([
   {
@@ -54,8 +55,12 @@ export const router = createBrowserRouter([
   },
   {
     path: "/student",
-    Component: StudentLayout,
+    element: <ProtectedRoute allowedRoles={['STUDENT']} />,
     children: [
+      {
+        path: "",
+        Component: StudentLayout,
+        children: [
       { index: true, Component: StudentDashboard },
       { path: "clearance", Component: MyClearance },
       { path: "new-clearance", Component: StartNewClearance },
@@ -65,12 +70,18 @@ export const router = createBrowserRouter([
       { path: "certificate", Component: StudentCertificate },
       { path: "profile", Component: StudentProfile },
       { path: "settings", Component: StudentSettings },
+        ]
+      }
     ],
   },
   {
     path: "/officer",
-    Component: OfficerLayout,
+    element: <ProtectedRoute allowedRoles={['OFFICER']} />,
     children: [
+      {
+        path: "",
+        Component: OfficerLayout,
+        children: [
       { index: true, Component: OfficerDashboard },
       { path: "pending", Component: PendingRequests },
       { path: "approved", Component: ApprovedRequests },
@@ -81,12 +92,18 @@ export const router = createBrowserRouter([
       { path: "account", Component: OfficerAccount },
       { path: "reports", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Reports</h1></div> },
       { path: "settings", Component: OfficerSettings },
+        ]
+      }
     ]
   },
   {
     path: "/registrar",
-    Component: RegistrarLayout,
+    element: <ProtectedRoute allowedRoles={['REGISTRAR']} />,
     children: [
+      {
+        path: "",
+        Component: RegistrarLayout,
+        children: [
       { index: true, Component: RegistrarDashboard },
       { path: "users", Component: UserManagement },
       { path: "students", Component: RegistrarStudentDatabasePage },
@@ -103,6 +120,8 @@ export const router = createBrowserRouter([
       { path: "reports", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Reports</h1></div> },
       { path: "messages", Component: () => <div className="p-8"><h1 className="text-2xl font-bold">Messages</h1></div> },
       { path: "settings", Component: RegistrarSettingsPage },
+        ]
+      }
     ]
   }
 ]);
