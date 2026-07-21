@@ -2,8 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 import { DashboardService } from './services/dashboard.service';
 import { AnalyticsService } from './services/analytics.service';
 import { ExportService } from './services/export.service';
-import User, { UserRole } from '../../users/user.model';
-import Clearance from '../../clearance/models/clearance.model';
+import User, { UserRole } from '../users/user.model';
+import Clearance from '../clearance/models/clearance.model';
 
 const dashboardService = new DashboardService();
 const analyticsService = new AnalyticsService();

@@ -3,7 +3,7 @@ import Clearance, { ClearanceStatus } from '../../clearance/models/clearance.mod
 import Workflow from '../../clearance/models/workflow.model';
 import Certificate from '../../certificates/models/certificate.model';
 import User from '../../users/user.model';
-import Department from '../../academic/models/department.model';
+import Department from '../../departments/department.model';
 import { NotificationRepository } from '../../communication/notifications/repositories/notification.repository';
 import { MessageService } from '../../communication/messages/services/message.service';
 
@@ -93,7 +93,7 @@ export class DashboardService {
       completedClearances,
       certificatesGenerated
     ] = await Promise.all([
-      User.countDocuments({ role: 'STUDENT', isActive: true }),
+      User.countDocuments({ role: 'STUDENT', isActive: true } as any),
       Clearance.countDocuments(),
       Clearance.countDocuments({ status: { $in: [ClearanceStatus.PENDING, ClearanceStatus.IN_PROGRESS] } }),
       Clearance.countDocuments({ status: ClearanceStatus.COMPLETED }),
