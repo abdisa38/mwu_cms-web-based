@@ -39,7 +39,7 @@ const UserSchema = new Schema<IUser>({
   lastLoginAt: { type: Date }
 }, { timestamps: true });
 
-UserSchema.pre<IUser>('save', async function (next) {
+UserSchema.pre<IUser>('save', async function (next: any) {
   if (this.isModified('passwordHash')) {
     this.passwordHash = await hashPassword(this.passwordHash);
   }
