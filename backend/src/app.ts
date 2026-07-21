@@ -7,7 +7,7 @@ import compression from 'compression';
 import rateLimit from 'express-rate-limit';
 
 import globalRouter from './routes';
-import { AppError } from './core/errors';
+import { ApiError } from './core/errors';
 
 const app = express();
 
@@ -64,7 +64,7 @@ app.all('*', (req: Request, res: Response, next: NextFunction) => {
 });
 
 // Global Error Handler
-app.use((err: Error | AppError, req: Request, res: Response, next: NextFunction) => {
+app.use((err: Error | ApiError, req: Request, res: Response, next: NextFunction) => {
   let statusCode = 500;
   let message = 'Internal Server Error';
 

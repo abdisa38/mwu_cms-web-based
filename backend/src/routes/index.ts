@@ -1,7 +1,6 @@
 import { Router } from 'express';
 
 import authRoutes from '../modules/auth/auth.routes';
-import userRoutes from '../modules/users/user.routes';
 import studentRoutes from '../modules/students/student.routes';
 import staffRoutes from '../modules/staff/staff.routes';
 import departmentRoutes from '../modules/departments/department.routes';
@@ -9,8 +8,8 @@ import facultyRoutes from '../modules/faculties/faculty.routes';
 import programRoutes from '../modules/programs/program.routes';
 import academicYearRoutes from '../modules/academic-years/academic-year.routes';
 
-import clearanceRoutes from '../modules/clearance/routes/clearance.routes';
-import workflowRoutes from '../modules/clearance/routes/workflow.routes';
+import clearanceRoutes from '../modules/clearance/clearance.routes';
+import workflowRoutes from '../modules/clearance/workflow.routes';
 
 import documentRoutes from '../modules/documents/document.routes';
 import certificateRoutes from '../modules/certificates/certificate.routes';
@@ -30,7 +29,6 @@ router.get('/ping', (req, res) => res.json({ message: 'pong' }));
 
 // Auth & Identity
 router.use('/auth', authRoutes);
-router.use('/users', userRoutes);
 router.use('/students', studentRoutes);
 router.use('/staff', staffRoutes);
 
