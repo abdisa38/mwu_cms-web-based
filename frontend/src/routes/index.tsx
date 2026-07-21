@@ -11,6 +11,20 @@ import { ForgotPasswordPage } from '../features/auth/pages/ForgotPasswordPage';
 import { ResetPasswordPage } from '../features/auth/pages/ResetPasswordPage';
 import { EmailVerificationPage } from '../features/auth/pages/EmailVerificationPage';
 
+// Student Pages
+import { StudentDashboard } from '../features/student/pages/StudentDashboard';
+import { MyClearancePage } from '../features/student/pages/MyClearancePage';
+import { StartClearancePage } from '../features/student/pages/StartClearancePage';
+import { ClearanceDetailsPage } from '../features/student/pages/ClearanceDetailsPage';
+import { StudentDocumentsPage } from '../features/student/pages/StudentDocumentsPage';
+import { StudentCertificatesPage } from '../features/student/pages/StudentCertificatesPage';
+import { StudentProfilePage } from '../features/student/pages/StudentProfilePage';
+import { StudentSettingsPage } from '../features/student/pages/StudentSettingsPage';
+
+// Communication Pages
+import { NotificationsPage } from '../features/communication/pages/NotificationsPage';
+import { MessagesPage } from '../features/communication/pages/MessagesPage';
+
 // Fallback pages (We'll implement actual pages in the next steps)
 const PlaceholderPage = ({ title }: { title: string }) => (
   <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 h-96 flex flex-col items-center justify-center">
@@ -36,19 +50,35 @@ export const router = createBrowserRouter([
   {
     element: <AuthGuard />,
     children: [
+      // Common authenticated routes (e.g., profile, settings)
       {
         element: <DashboardLayout />,
         children: [
-          // Role: STUDENT
+          { path: '/profile', element: <StudentProfilePage /> }, // We'll make this generic later
+          { path: '/settings', element: <StudentSettingsPage /> },
+          { path: '/notifications', element: <NotificationsPage /> },
+          { path: '/messages', element: <MessagesPage /> },
+        ]
+      },
+
+      // Student Routes
+      {
+        path: '/student',
+        element: <RoleGuard allowedRoles={['STUDENT']} />,
+        children: [
           {
-            element: <RoleGuard allowedRoles={['STUDENT']} />,
+            element: <DashboardLayout />,
             children: [
-              { path: '/student/dashboard', element: <PlaceholderPage title="Student Dashboard" /> },
-              { path: '/student/clearance', element: <PlaceholderPage title="My Clearance" /> },
-              { path: '/student/documents', element: <PlaceholderPage title="Document Center" /> },
-              { path: '/student/appeals', element: <PlaceholderPage title="Appeal Center" /> },
+              { path: 'dashboard', element: <StudentDashboard /> },
+              { path: 'clearances', element: <MyClearancePage /> },
+              { path: 'clearance/new', element: <StartClearancePage /> },
+              { path: 'clearance/:id', element: <ClearanceDetailsPage /> },
+              { path: 'documents', element: <StudentDocumentsPage /> },
+              { path: 'certificates', element: <StudentCertificatesPage /> },
             ]
-          },
+          }
+        ]
+      },
           
           // Role: OFFICER (Department/Library/Sports etc)
           {
