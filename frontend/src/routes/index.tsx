@@ -25,6 +25,13 @@ import { StudentSettingsPage } from '../features/student/pages/StudentSettingsPa
 import { NotificationsPage } from '../features/communication/pages/NotificationsPage';
 import { MessagesPage } from '../features/communication/pages/MessagesPage';
 
+// Staff Pages
+import { StaffDashboard } from '../features/staff/pages/StaffDashboard';
+import { ClearanceQueuePage } from '../features/staff/pages/ClearanceQueuePage';
+import { RequestDetailsPage } from '../features/staff/pages/RequestDetailsPage';
+import { StudentManagementPage } from '../features/staff/pages/StudentManagementPage';
+import { StaffReportsPage } from '../features/staff/pages/StaffReportsPage';
+
 // Fallback pages (We'll implement actual pages in the next steps)
 const PlaceholderPage = ({ title }: { title: string }) => (
   <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 h-96 flex flex-col items-center justify-center">
@@ -80,14 +87,23 @@ export const router = createBrowserRouter([
         ]
       },
           
-          // Role: OFFICER (Department/Library/Sports etc)
+      // Role: OFFICER (Department/Library/Sports etc)
+      {
+        path: '/staff',
+        element: <RoleGuard allowedRoles={['OFFICER', 'DEPARTMENT_HEAD']} />,
+        children: [
           {
-            element: <RoleGuard allowedRoles={['OFFICER']} />,
+            element: <DashboardLayout />,
             children: [
-              { path: '/officer/dashboard', element: <PlaceholderPage title="Officer Dashboard" /> },
-              { path: '/officer/queue', element: <PlaceholderPage title="Clearance Queue" /> },
+              { path: 'dashboard', element: <StaffDashboard /> },
+              { path: 'queue', element: <ClearanceQueuePage /> },
+              { path: 'queue/:id', element: <RequestDetailsPage /> },
+              { path: 'students', element: <StudentManagementPage /> },
+              { path: 'reports', element: <StaffReportsPage /> },
             ]
-          },
+          }
+        ]
+      },
 
           // Role: REGISTRAR
           {
