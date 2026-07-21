@@ -1,21 +1,48 @@
-import { configureStore } from '@reduxjs/toolkit';
-import { baseApi } from '../api/baseApi';
+import { configureStore, combineReducers } from '@reduxjs/toolkit';
+import { setupListeners } from '@reduxjs/toolkit/query';
+import { 
+  persistStore, 
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import authReducer from './slices/authSlice';
+import { baseApi } from '../api/baseApi';
 
-export const store = configureStore({
-  reducer: {
-    // Reducers
-    auth: authReducer,
-    
-    // Add the generated reducer as a specific top-level slice
-    [baseApi.reducerPath]: baseApi.reducer,
-  },
-  // Adding the api middleware enables caching, invalidation, polling,
-  // and other useful features of `rtk-query`.
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(baseApi.middleware),
+// Combine reducers
+const rootReducer = combineReducers({
+  auth: authReducer,
+  [baseApi.reducerPath]: baseApi.reducer,
 });
 
-// Infer the `RootState` and `AppDispatch` types from the store itself
+// Configure persistence
+const persistConfig = {
+  key: 'mwu-cms-root',
+  storage,
+  whitelist: ['auth'], // Only persist the auth slice (JWT token)
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        // Ignore redux-persist actions for serializable check
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }).concat(baseApi.middleware),
+});
+
+export const persistor = persistStore(store);
+
+setupListeners(store.dispatch);
+
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
