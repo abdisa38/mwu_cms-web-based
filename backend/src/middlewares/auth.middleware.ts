@@ -25,3 +25,17 @@ export const authenticate = (req: AuthRequest, res: Response, next: NextFunction
     next(new UnauthorizedError('Invalid or expired authentication token'));
   }
 };
+
+export const authorize = (...roles: string[]) => {
+  return (req: AuthRequest, res: Response, next: NextFunction) => {
+    if (!req.user) {
+      return next(new UnauthorizedError('Not authenticated'));
+    }
+    
+    if (!roles.includes(req.user.roleId)) { // Assuming roleId contains the string representation for now, or role name
+      return next(new UnauthorizedError('Forbidden: Insufficient privileges'));
+    }
+
+    next();
+  };
+};
