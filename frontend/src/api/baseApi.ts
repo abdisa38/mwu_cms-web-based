@@ -2,22 +2,32 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '../store';
 
 // Base API configuration using RTK Query
+const baseQuery = fetchBaseQuery({
+  baseUrl: '/api/v1', // Leverages Vite proxy
+  prepareHeaders: (headers, { getState }) => {
+    const token = (getState() as RootState).auth.token;
+    if (token) {
+      headers.set('authorization', `Bearer ${token}`);
+    }
+    return headers;
+  },
+});
+
 export const baseApi = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({
-    baseUrl: 'http://localhost:5000/api/v1',
-    prepareHeaders: (headers, { getState }) => {
-      // Get the token from Redux state
-      const token = (getState() as RootState).auth.token;
-
-      // If we have a token, set the Authorization header
-      if (token) {
-        headers.set('authorization', `Bearer ${token}`);
-      }
-
-      return headers;
-    },
-  }),
-  tagTypes: ['User', 'Student', 'Clearance'], // Used for cache invalidation
-  endpoints: () => ({}), // Endpoints will be injected from other files
+  baseQuery: async (args, api, extraOptions) => {
+    const result = await baseQuery(args, api, extraOptions);
+    // Global Error Interception
+    if (result.error && result.error.status === 401) {
+      // Dispatch auto-logout action if unauthorized
+      // api.dispatch(logout()); 
+    }
+    return result;
+  },
+  tagTypes: [
+    'User', 'Student', 'Staff', 'Department', 'Clearance', 
+    'Workflow', 'Document', 'Certificate', 'Notification', 
+    'Message', 'Audit', 'Settings'
+  ],
+  endpoints: () => ({}),
 });
