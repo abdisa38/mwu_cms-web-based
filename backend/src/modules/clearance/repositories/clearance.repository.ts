@@ -1,7 +1,7 @@
 import Clearance, { IClearance, ClearanceStatus } from '../models/clearance.model';
 
 export class ClearanceRepository {
-  public async create(data: Partial<IClearance>): Promise<IClearance> {
+  public async create(data: any): Promise<IClearance> {
     const clearance = new Clearance(data);
     return clearance.save();
   }
@@ -25,7 +25,7 @@ export class ClearanceRepository {
       });
   }
 
-  public async update(id: string, data: Partial<IClearance>): Promise<IClearance | null> {
+  public async update(id: string, data: any): Promise<IClearance | null> {
     return Clearance.findByIdAndUpdate(id, data, { new: true });
   }
 

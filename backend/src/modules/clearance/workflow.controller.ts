@@ -7,7 +7,7 @@ const workflowService = new WorkflowService();
 export class WorkflowController {
   public async getById(req: Request, res: Response, next: NextFunction) {
     try {
-      const workflow = await workflowService.getWorkflowById(req.params.id);
+      const workflow = await workflowService.getWorkflowById((req.params.id as string));
       res.status(200).json({ success: true, data: workflow });
     } catch (error) {
       next(error);
@@ -24,7 +24,7 @@ export class WorkflowController {
       }
 
       const workflow = await workflowService.processDepartmentApproval(
-        req.params.id,
+        (req.params.id as string),
         validated.departmentId,
         userId,
         validated.action,
@@ -43,7 +43,7 @@ export class WorkflowController {
       const validated = ProcessWorkflowDto.parse(req.body);
 
       const workflow = await workflowService.processRegistrarFinal(
-        req.params.id,
+        (req.params.id as string),
         userId,
         validated.action as 'APPROVE' | 'REJECT',
         validated.remarks

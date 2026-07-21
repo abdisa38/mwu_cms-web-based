@@ -30,7 +30,7 @@ export class StudentController {
 
   public async getById(req: Request, res: Response, next: NextFunction) {
     try {
-      const student = await studentService.getStudentById(req.params.id);
+      const student = await studentService.getStudentById((req.params.id as string));
       res.status(200).json({ success: true, data: student });
     } catch (error) {
       next(error);
@@ -40,7 +40,7 @@ export class StudentController {
   public async update(req: Request, res: Response, next: NextFunction) {
     try {
       const validated = UpdateStudentDto.parse(req.body);
-      const student = await studentService.updateStudent(req.params.id, validated);
+      const student = await studentService.updateStudent((req.params.id as string), validated);
       res.status(200).json({ success: true, data: student });
     } catch (error) {
       next(error);
@@ -49,7 +49,7 @@ export class StudentController {
 
   public async delete(req: Request, res: Response, next: NextFunction) {
     try {
-      await studentService.deleteStudent(req.params.id);
+      await studentService.deleteStudent((req.params.id as string));
       res.status(200).json({ success: true, message: 'Student soft-deleted successfully' });
     } catch (error) {
       next(error);
@@ -58,7 +58,7 @@ export class StudentController {
 
   public async restore(req: Request, res: Response, next: NextFunction) {
     try {
-      await studentService.restoreStudent(req.params.id);
+      await studentService.restoreStudent((req.params.id as string));
       res.status(200).json({ success: true, message: 'Student restored successfully' });
     } catch (error) {
       next(error);

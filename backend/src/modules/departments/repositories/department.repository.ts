@@ -1,7 +1,7 @@
 import Department, { IDepartment } from '../models/department.model';
 
 export class DepartmentRepository {
-  public async create(data: Partial<IDepartment>): Promise<IDepartment> {
+  public async create(data: any): Promise<IDepartment> {
     const department = new Department(data);
     return department.save();
   }
@@ -18,7 +18,7 @@ export class DepartmentRepository {
     return Department.findById(id).populate('facultyId', 'name code').populate('headId', 'firstName lastName email');
   }
 
-  public async update(id: string, data: Partial<IDepartment>): Promise<IDepartment | null> {
+  public async update(id: string, data: any): Promise<IDepartment | null> {
     return Department.findByIdAndUpdate(id, data, { new: true });
   }
 

@@ -1,7 +1,7 @@
 import AcademicYear, { IAcademicYear } from '../models/academic-year.model';
 
 export class AcademicYearRepository {
-  public async create(data: Partial<IAcademicYear>): Promise<IAcademicYear> {
+  public async create(data: any): Promise<IAcademicYear> {
     const year = new AcademicYear(data);
     return year.save();
   }
@@ -18,7 +18,7 @@ export class AcademicYearRepository {
     return AcademicYear.findById(id);
   }
 
-  public async update(id: string, data: Partial<IAcademicYear>): Promise<IAcademicYear | null> {
+  public async update(id: string, data: any): Promise<IAcademicYear | null> {
     return AcademicYear.findByIdAndUpdate(id, data, { new: true });
   }
 

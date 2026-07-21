@@ -1,7 +1,7 @@
 import Student, { IStudent } from '../models/student.model';
 
 export class StudentRepository {
-  public async create(data: Partial<IStudent>): Promise<IStudent> {
+  public async create(data: any): Promise<IStudent> {
     const student = new Student(data);
     return student.save();
   }
@@ -25,7 +25,7 @@ export class StudentRepository {
       .populate('batchId', 'year');
   }
 
-  public async update(id: string, data: Partial<IStudent>): Promise<IStudent | null> {
+  public async update(id: string, data: any): Promise<IStudent | null> {
     return Student.findByIdAndUpdate(id, data, { new: true });
   }
 

@@ -35,7 +35,7 @@ export class ClearanceController {
 
   public async getById(req: Request, res: Response, next: NextFunction) {
     try {
-      const clearance = await clearanceService.getClearanceDetails(req.params.id);
+      const clearance = await clearanceService.getClearanceDetails((req.params.id as string));
       res.status(200).json({ success: true, data: clearance });
     } catch (error) {
       next(error);
@@ -44,7 +44,7 @@ export class ClearanceController {
 
   public async getTimeline(req: Request, res: Response, next: NextFunction) {
     try {
-      const timeline = await timelineService.getClearanceTimeline(req.params.id);
+      const timeline = await timelineService.getClearanceTimeline((req.params.id as string));
       res.status(200).json({ success: true, data: timeline });
     } catch (error) {
       next(error);
@@ -70,7 +70,7 @@ export class ClearanceController {
   public async cancel(req: Request, res: Response, next: NextFunction) {
     try {
       const userId = (req as any).user.id;
-      await clearanceService.cancelClearance(req.params.id, userId);
+      await clearanceService.cancelClearance((req.params.id as string), userId);
       res.status(200).json({ success: true, message: 'Clearance cancelled successfully' });
     } catch (error) {
       next(error);

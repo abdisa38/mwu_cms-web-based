@@ -1,7 +1,7 @@
 import Faculty, { IFaculty } from '../models/faculty.model';
 
 export class FacultyRepository {
-  public async create(data: Partial<IFaculty>): Promise<IFaculty> {
+  public async create(data: any): Promise<IFaculty> {
     const faculty = new Faculty(data);
     return faculty.save();
   }
@@ -18,7 +18,7 @@ export class FacultyRepository {
     return Faculty.findById(id);
   }
 
-  public async update(id: string, data: Partial<IFaculty>): Promise<IFaculty | null> {
+  public async update(id: string, data: any): Promise<IFaculty | null> {
     return Faculty.findByIdAndUpdate(id, data, { new: true });
   }
 

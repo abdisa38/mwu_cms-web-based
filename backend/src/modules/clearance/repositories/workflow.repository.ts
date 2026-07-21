@@ -1,7 +1,7 @@
 import Workflow, { IWorkflow, WorkflowStageStatus } from '../models/workflow.model';
 
 export class WorkflowRepository {
-  public async create(data: Partial<IWorkflow>): Promise<IWorkflow> {
+  public async create(data: any): Promise<IWorkflow> {
     const workflow = new Workflow(data);
     return workflow.save();
   }
@@ -10,7 +10,7 @@ export class WorkflowRepository {
     return Workflow.findById(id).populate('stages.departmentId', 'name code');
   }
 
-  public async update(id: string, data: Partial<IWorkflow>): Promise<IWorkflow | null> {
+  public async update(id: string, data: any): Promise<IWorkflow | null> {
     return Workflow.findByIdAndUpdate(id, data, { new: true });
   }
 

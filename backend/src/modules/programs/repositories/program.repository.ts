@@ -1,7 +1,7 @@
 import Program, { IProgram } from '../models/program.model';
 
 export class ProgramRepository {
-  public async create(data: Partial<IProgram>): Promise<IProgram> {
+  public async create(data: any): Promise<IProgram> {
     const program = new Program(data);
     return program.save();
   }
@@ -18,7 +18,7 @@ export class ProgramRepository {
     return Program.findById(id).populate('departmentId', 'name code').populate('facultyId', 'name code');
   }
 
-  public async update(id: string, data: Partial<IProgram>): Promise<IProgram | null> {
+  public async update(id: string, data: any): Promise<IProgram | null> {
     return Program.findByIdAndUpdate(id, data, { new: true });
   }
 

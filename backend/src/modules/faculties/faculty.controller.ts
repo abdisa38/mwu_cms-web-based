@@ -30,7 +30,7 @@ export class FacultyController {
 
   public async getById(req: Request, res: Response, next: NextFunction) {
     try {
-      const faculty = await facultyService.getFacultyById(req.params.id);
+      const faculty = await facultyService.getFacultyById((req.params.id as string));
       res.status(200).json({ success: true, data: faculty });
     } catch (error) {
       next(error);
@@ -40,7 +40,7 @@ export class FacultyController {
   public async update(req: Request, res: Response, next: NextFunction) {
     try {
       const validated = UpdateFacultyDto.parse(req.body);
-      const faculty = await facultyService.updateFaculty(req.params.id, validated);
+      const faculty = await facultyService.updateFaculty((req.params.id as string), validated);
       res.status(200).json({ success: true, data: faculty });
     } catch (error) {
       next(error);
@@ -49,7 +49,7 @@ export class FacultyController {
 
   public async delete(req: Request, res: Response, next: NextFunction) {
     try {
-      await facultyService.deleteFaculty(req.params.id);
+      await facultyService.deleteFaculty((req.params.id as string));
       res.status(200).json({ success: true, message: 'Faculty deleted successfully' });
     } catch (error) {
       next(error);

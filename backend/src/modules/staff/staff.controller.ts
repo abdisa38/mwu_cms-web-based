@@ -30,7 +30,7 @@ export class StaffController {
 
   public async getById(req: Request, res: Response, next: NextFunction) {
     try {
-      const staff = await staffService.getStaffById(req.params.id);
+      const staff = await staffService.getStaffById((req.params.id as string));
       res.status(200).json({ success: true, data: staff });
     } catch (error) {
       next(error);
@@ -40,7 +40,7 @@ export class StaffController {
   public async update(req: Request, res: Response, next: NextFunction) {
     try {
       const validated = UpdateStaffDto.parse(req.body);
-      const staff = await staffService.updateStaff(req.params.id, validated);
+      const staff = await staffService.updateStaff((req.params.id as string), validated);
       res.status(200).json({ success: true, data: staff });
     } catch (error) {
       next(error);
@@ -49,7 +49,7 @@ export class StaffController {
 
   public async delete(req: Request, res: Response, next: NextFunction) {
     try {
-      await staffService.deleteStaff(req.params.id);
+      await staffService.deleteStaff((req.params.id as string));
       res.status(200).json({ success: true, message: 'Staff soft-deleted successfully' });
     } catch (error) {
       next(error);
@@ -58,7 +58,7 @@ export class StaffController {
 
   public async restore(req: Request, res: Response, next: NextFunction) {
     try {
-      await staffService.restoreStaff(req.params.id);
+      await staffService.restoreStaff((req.params.id as string));
       res.status(200).json({ success: true, message: 'Staff restored successfully' });
     } catch (error) {
       next(error);

@@ -30,7 +30,7 @@ export class ProgramController {
 
   public async getById(req: Request, res: Response, next: NextFunction) {
     try {
-      const program = await programService.getProgramById(req.params.id);
+      const program = await programService.getProgramById((req.params.id as string));
       res.status(200).json({ success: true, data: program });
     } catch (error) {
       next(error);
@@ -40,7 +40,7 @@ export class ProgramController {
   public async update(req: Request, res: Response, next: NextFunction) {
     try {
       const validated = UpdateProgramDto.parse(req.body);
-      const program = await programService.updateProgram(req.params.id, validated);
+      const program = await programService.updateProgram((req.params.id as string), validated);
       res.status(200).json({ success: true, data: program });
     } catch (error) {
       next(error);
@@ -49,7 +49,7 @@ export class ProgramController {
 
   public async delete(req: Request, res: Response, next: NextFunction) {
     try {
-      await programService.deleteProgram(req.params.id);
+      await programService.deleteProgram((req.params.id as string));
       res.status(200).json({ success: true, message: 'Program deleted successfully' });
     } catch (error) {
       next(error);

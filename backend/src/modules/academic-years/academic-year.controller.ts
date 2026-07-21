@@ -29,7 +29,7 @@ export class AcademicYearController {
 
   public async getById(req: Request, res: Response, next: NextFunction) {
     try {
-      const year = await academicYearService.getAcademicYearById(req.params.id);
+      const year = await academicYearService.getAcademicYearById((req.params.id as string));
       res.status(200).json({ success: true, data: year });
     } catch (error) {
       next(error);
@@ -39,7 +39,7 @@ export class AcademicYearController {
   public async update(req: Request, res: Response, next: NextFunction) {
     try {
       const validated = UpdateAcademicYearDto.parse(req.body);
-      const year = await academicYearService.updateAcademicYear(req.params.id, validated);
+      const year = await academicYearService.updateAcademicYear((req.params.id as string), validated);
       res.status(200).json({ success: true, data: year });
     } catch (error) {
       next(error);

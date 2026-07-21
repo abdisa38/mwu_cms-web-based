@@ -1,7 +1,7 @@
 import Timeline, { ITimeline } from '../models/timeline.model';
 
 export class TimelineRepository {
-  public async create(data: Partial<ITimeline>): Promise<ITimeline> {
+  public async create(data: any): Promise<ITimeline> {
     const timeline = new Timeline(data);
     return timeline.save();
   }
