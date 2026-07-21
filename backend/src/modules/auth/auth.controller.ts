@@ -1,83 +1,83 @@
 import { Request, Response, NextFunction } from 'express';
-import User, { UserRole } from '../users/user.model';
-import { signToken } from '../../utils/jwt';
-import { AppError } from '../../utils/AppError';
+import { AuthService } from './services/auth.service';
+import { RegisterDto, LoginDto } from './dtos/auth.dto';
+import { BadRequestError } from '../../core/errors';
 
-// Helper to send token response
-const sendTokenResponse = (user: any, statusCode: number, res: Response) => {
-  const token = signToken(user._id.toString(), user.role);
+const authService = new AuthService();
 
-  const cookieOptions = {
-    expires: new Date(Date.now() + parseInt(process.env.JWT_EXPIRES_IN || '1') * 24 * 60 * 60 * 1000),
-    httpOnly: true,
-    secure: process.env.NODE_ENV === 'production'
-  };
-
-  res.cookie('jwt', token, cookieOptions);
-
-  // Remove password from output
-  user.password = undefined;
-
-  res.status(statusCode).json({
-    status: 'success',
-    token,
-    data: {
-      user
+export class AuthController {
+  public async register(req: Request, res: Response, next: NextFunction) {
+    try {
+      const validated = RegisterDto.parse(req.body);
+      const result = await authService.register(validated);
+      res.status(201).json({ success: true, message: result.message });
+    } catch (error: any) {
+      next(error);
     }
-  });
-};
-
-export const register = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { email, password, role } = req.body;
-
-    // Validate input
-    if (!email || !password || !role) {
-      return next(new AppError('Please provide email, password and role', 400));
-    }
-
-    // Check if user exists
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return next(new AppError('Email already in use', 400));
-    }
-
-    // Create user
-    const newUser = await User.create({
-      email,
-      password,
-      role
-    });
-
-    sendTokenResponse(newUser, 201, res);
-  } catch (err) {
-    next(err);
   }
-};
 
-export const login = async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { email, password } = req.body;
+  public async login(req: Request, res: Response, next: NextFunction) {
+    try {
+      const validated = LoginDto.parse(req.body);
+      const ipAddress = req.ip;
+      const userAgent = req.headers['user-agent'];
 
-    // 1) Check if email and password exist
-    if (!email || !password) {
-      return next(new AppError('Please provide email and password', 400));
+      const result = await authService.login(validated, ipAddress, userAgent);
+
+      res.cookie('refreshToken', result.refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
+      });
+
+      res.status(200).json({
+        success: true,
+        data: {
+          accessToken: result.accessToken,
+          user: {
+            id: result.user._id,
+            email: result.user.email,
+            firstName: result.user.firstName,
+            lastName: result.user.lastName,
+            role: result.user.roleId
+          }
+        }
+      });
+    } catch (error: any) {
+      next(error);
     }
-
-    // 2) Check if user exists && password is correct
-    const user = await User.findOne({ email }).select('+password');
-    
-    if (!user || !(await user.comparePassword(password))) {
-      return next(new AppError('Incorrect email or password', 401));
-    }
-
-    // 3) Update last login
-    user.lastLogin = new Date();
-    await user.save({ validateBeforeSave: false });
-
-    // 4) If everything ok, send token to client
-    sendTokenResponse(user, 200, res);
-  } catch (err) {
-    next(err);
   }
-};
+
+  public async refresh(req: Request, res: Response, next: NextFunction) {
+    try {
+      const refreshToken = req.cookies.refreshToken || req.body.refreshToken;
+      if (!refreshToken) throw new BadRequestError('Refresh token required');
+
+      const result = await authService.refreshTokens(refreshToken);
+
+      res.cookie('refreshToken', result.refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'strict',
+        maxAge: 7 * 24 * 60 * 60 * 1000
+      });
+
+      res.status(200).json({
+        success: true,
+        data: { accessToken: result.accessToken }
+      });
+    } catch (error: any) {
+      next(error);
+    }
+  }
+
+  public async logout(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.clearCookie('refreshToken');
+      res.status(200).json({ success: true, message: 'Logged out successfully' });
+    } catch (error: any) {
+      next(error);
+    }
+  }
+}
