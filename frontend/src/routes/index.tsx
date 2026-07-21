@@ -32,6 +32,14 @@ import { RequestDetailsPage } from '../features/staff/pages/RequestDetailsPage';
 import { StudentManagementPage } from '../features/staff/pages/StudentManagementPage';
 import { StaffReportsPage } from '../features/staff/pages/StaffReportsPage';
 
+// Registrar Pages
+import { RegistrarDashboard } from '../features/registrar/pages/RegistrarDashboard';
+import { FinalApprovalQueuePage } from '../features/registrar/pages/FinalApprovalQueuePage';
+import { FinalApprovalDetailsPage } from '../features/registrar/pages/FinalApprovalDetailsPage';
+import { CertificateManagementPage } from '../features/registrar/pages/CertificateManagementPage';
+import { StaffManagementPage } from '../features/registrar/pages/StaffManagementPage';
+import { SystemSettingsPage } from '../features/registrar/pages/SystemSettingsPage';
+
 // Fallback pages (We'll implement actual pages in the next steps)
 const PlaceholderPage = ({ title }: { title: string }) => (
   <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 h-96 flex flex-col items-center justify-center">
@@ -105,15 +113,24 @@ export const router = createBrowserRouter([
         ]
       },
 
-          // Role: REGISTRAR
+      // Role: REGISTRAR & SUPER_ADMIN
+      {
+        path: '/registrar',
+        element: <RoleGuard allowedRoles={['REGISTRAR', 'SUPER_ADMIN']} />,
+        children: [
           {
-            element: <RoleGuard allowedRoles={['REGISTRAR']} />,
+            element: <DashboardLayout />,
             children: [
-              { path: '/registrar/dashboard', element: <PlaceholderPage title="Registrar Dashboard" /> },
-              { path: '/registrar/certificates', element: <PlaceholderPage title="Certificate Management" /> },
-              { path: '/registrar/students', element: <PlaceholderPage title="Student Database" /> },
+              { path: 'dashboard', element: <RegistrarDashboard /> },
+              { path: 'queue', element: <FinalApprovalQueuePage /> },
+              { path: 'queue/:id', element: <FinalApprovalDetailsPage /> },
+              { path: 'certificates', element: <CertificateManagementPage /> },
+              { path: 'staff', element: <StaffManagementPage /> },
+              { path: 'settings', element: <SystemSettingsPage /> },
             ]
-          },
+          }
+        ]
+      },
 
           // Role: ADMIN
           {
