@@ -4,6 +4,13 @@ import { RoleGuard } from '../guards/RoleGuard';
 import { PublicLayout } from '../layouts/PublicLayout';
 import { DashboardLayout } from '../layouts/DashboardLayout';
 
+// Auth Pages
+import { LoginPage } from '../features/auth/pages/LoginPage';
+import { RegisterPage } from '../features/auth/pages/RegisterPage';
+import { ForgotPasswordPage } from '../features/auth/pages/ForgotPasswordPage';
+import { ResetPasswordPage } from '../features/auth/pages/ResetPasswordPage';
+import { EmailVerificationPage } from '../features/auth/pages/EmailVerificationPage';
+
 // Fallback pages (We'll implement actual pages in the next steps)
 const PlaceholderPage = ({ title }: { title: string }) => (
   <div className="bg-white p-8 rounded-xl shadow-sm border border-slate-100 h-96 flex flex-col items-center justify-center">
@@ -17,14 +24,11 @@ export const router = createBrowserRouter([
   {
     element: <GuestGuard />,
     children: [
-      {
-        element: <PublicLayout />,
-        children: [
-          { path: '/login', element: <PlaceholderPage title="Login to MWU e-Clearance" /> },
-          { path: '/register', element: <PlaceholderPage title="Student Registration" /> },
-          { path: '/forgot-password', element: <PlaceholderPage title="Forgot Password" /> },
-        ]
-      }
+      { path: '/login', element: <LoginPage /> },
+      { path: '/register', element: <RegisterPage /> },
+      { path: '/forgot-password', element: <ForgotPasswordPage /> },
+      { path: '/reset-password/:token', element: <ResetPasswordPage /> },
+      { path: '/verify-email/:token', element: <EmailVerificationPage /> },
     ]
   },
 
