@@ -29,4 +29,4 @@ StaffSchema.pre(/^find/, function(next: any) {
   next();
 });
 
-export default mongoose.models. || mongoose.model<>('',);
+export default mongoose.models.Staff || mongoose.model<IStaff>('Staff', StaffSchema);

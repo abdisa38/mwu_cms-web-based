@@ -22,4 +22,4 @@ const CertificateSchema = new Schema<ICertificate>({
   status: { type: String, enum: ['ACTIVE', 'REVOKED'], default: 'ACTIVE' }
 }, { timestamps: true });
 
-export default mongoose.models. || mongoose.model<>('',);
+export default mongoose.models.Certificate || mongoose.model<ICertificate>('Certificate', CertificateSchema);

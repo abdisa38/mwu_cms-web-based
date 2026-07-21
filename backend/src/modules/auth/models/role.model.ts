@@ -20,4 +20,4 @@ const RoleSchema = new Schema<IRole>({
   isActive: { type: Boolean, default: true },
 }, { timestamps: true });
 
-export default mongoose.models. || mongoose.model<>('',);
+export default mongoose.models.Role || mongoose.model<IRole>('Role', RoleSchema);

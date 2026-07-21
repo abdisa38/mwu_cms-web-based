@@ -50,4 +50,4 @@ UserSchema.methods.comparePassword = async function (candidate: string): Promise
   return comparePassword(candidate, this.passwordHash);
 };
 
-export default mongoose.models. || mongoose.model<>('',);
+export default mongoose.models.User || mongoose.model<IUser>('User', UserSchema);

@@ -47,4 +47,4 @@ ClearanceSchema.index(
   }
 );
 
-export default mongoose.models. || mongoose.model<>('',);
+export default mongoose.models.Clearance || mongoose.model<IClearance>('Clearance', ClearanceSchema);

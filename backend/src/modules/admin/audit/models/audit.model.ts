@@ -39,4 +39,4 @@ const AuditLogSchema = new Schema<IAuditLog>({
 AuditLogSchema.index({ userId: 1, action: 1 });
 AuditLogSchema.index({ createdAt: -1 });
 
-export default mongoose.models. || mongoose.model<>('',);
+export default mongoose.models.AuditLog || mongoose.model<IAuditLog>('AuditLog', AuditLogSchema);

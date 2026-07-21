@@ -29,4 +29,4 @@ MessageSchema.pre<mongoose.Query<any, any>>(/^find/, function(next: any) {
   next();
 });
 
-export default mongoose.models. || mongoose.model<>('',);
+export default mongoose.models.Message || mongoose.model<IMessage>('Message', MessageSchema);

@@ -16,4 +16,4 @@ const AcademicYearSchema = new Schema<IAcademicYear>({
   isClosed: { type: Boolean, default: false }
 }, { timestamps: true });
 
-export default mongoose.models. || mongoose.model<>('',);
+export default mongoose.models.AcademicYear || mongoose.model<IAcademicYear>('AcademicYear', AcademicYearSchema);

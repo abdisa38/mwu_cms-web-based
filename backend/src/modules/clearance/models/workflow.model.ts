@@ -42,4 +42,4 @@ const WorkflowSchema = new Schema<IWorkflow>({
   registrarFinalStatus: { type: String, enum: Object.values(WorkflowStageStatus), default: WorkflowStageStatus.PENDING }
 }, { timestamps: true });
 
-export default mongoose.models. || mongoose.model<>('',);
+export default mongoose.models.WorkflowStage || mongoose.model<IWorkflowStage>('WorkflowStage', WorkflowStageSchema);
