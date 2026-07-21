@@ -40,9 +40,9 @@ const seedDatabase = async () => {
     // 3. Create Departments
     console.log('⏳ Creating Departments...');
     const depts = await Department.insertMany([
-      { name: 'Computer Science', code: 'CS', facultyId: new mongoose.Types.ObjectId() },
-      { name: 'Library', code: 'LIB', facultyId: new mongoose.Types.ObjectId() },
-      { name: 'Sports', code: 'SPT', facultyId: new mongoose.Types.ObjectId() },
+      { name: 'Computer Science', code: 'CS', faculty: 'Computing and Informatics' },
+      { name: 'Library', code: 'LIB', faculty: 'Administrative' },
+      { name: 'Sports', code: 'SPT', faculty: 'Administrative' },
     ]);
 
     // 4. Create Users
