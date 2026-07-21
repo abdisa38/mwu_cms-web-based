@@ -41,6 +41,6 @@ export class ExportService {
 
     // Return as buffer
     const buffer = await workbook.xlsx.writeBuffer();
-    return buffer as Buffer;
+    return buffer as unknown as Buffer;
   }
 }
