@@ -44,15 +44,15 @@ export function OfficerLayout() {
     <div className="flex h-screen bg-slate-50 overflow-hidden font-sans text-slate-900">
       {/* Sidebar */}
       <aside 
-        className={`${sidebarOpen ? 'w-64' : 'w-20'} hidden md:flex flex-col bg-[#1E3A8A] text-white transition-all duration-300 ease-in-out z-20 shadow-xl`}
+        className={`${sidebarOpen ? 'w-64' : 'w-20'} hidden md:flex flex-col bg-white border-r border-slate-200 transition-all duration-300 ease-in-out z-20`}
       >
-        <div className="h-16 flex items-center justify-between px-4 border-b border-blue-800">
+        <div className="h-16 flex items-center justify-between px-4 border-b border-slate-200">
           <div className={`flex items-center gap-3 ${!sidebarOpen && 'justify-center w-full'}`}>
-            <ImageWithFallback src={mwuLogo} alt="MWU Logo" className="w-8 h-8 rounded-md object-contain bg-white p-0.5" />
-            {sidebarOpen && <span className="font-bold text-white truncate">MWU Officer</span>}
+            <ImageWithFallback src={mwuLogo} alt="MWU Logo" className="w-8 h-8 rounded-md object-contain" />
+            {sidebarOpen && <span className="font-bold text-slate-900 truncate">MWU Officer</span>}
           </div>
           {sidebarOpen && (
-            <button onClick={() => setSidebarOpen(false)} className="text-blue-200 hover:text-white">
+            <button onClick={() => setSidebarOpen(false)} className="text-slate-400 hover:text-slate-600">
               <Menu className="w-5 h-5" />
             </button>
           )}
@@ -60,12 +60,12 @@ export function OfficerLayout() {
 
         <div className="flex-1 overflow-y-auto py-4 flex flex-col gap-1 px-3">
           {!sidebarOpen && (
-            <button onClick={() => setSidebarOpen(true)} className="flex justify-center p-2 mb-4 text-blue-200 hover:text-white rounded-lg hover:bg-blue-800">
+            <button onClick={() => setSidebarOpen(true)} className="flex justify-center p-2 mb-4 text-slate-400 hover:text-slate-600 rounded-lg hover:bg-slate-100">
               <Menu className="w-5 h-5" />
             </button>
           )}
           
-          <div className="text-xs font-semibold text-blue-300 uppercase tracking-wider mb-2 px-3 mt-2">
+          <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 px-3 mt-2">
             {sidebarOpen ? 'Clearance Queue' : '•••'}
           </div>
           
@@ -77,23 +77,23 @@ export function OfficerLayout() {
                 to={item.path}
                 className={`flex items-center ${sidebarOpen ? 'px-3' : 'justify-center'} py-2.5 rounded-lg transition-colors group relative ${
                   isActive 
-                    ? 'bg-blue-600 text-white font-medium shadow-sm' 
-                    : 'text-blue-200 hover:bg-blue-800 hover:text-white'
+                    ? 'bg-blue-50 text-blue-700 font-medium' 
+                    : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                 }`}
               >
-                <item.icon className={`w-5 h-5 ${isActive ? 'text-white' : 'text-blue-300 group-hover:text-white'}`} />
+                <item.icon className={`w-5 h-5 ${isActive ? 'text-blue-600' : 'text-slate-400 group-hover:text-slate-600'}`} />
                 {sidebarOpen && (
                   <>
                     <span className="ml-3 truncate">{item.label}</span>
                     {item.badge && (
-                      <span className="ml-auto bg-blue-500 text-white py-0.5 px-2 rounded-full text-xs font-bold">
+                      <span className="ml-auto bg-blue-100 text-blue-700 py-0.5 px-2 rounded-full text-xs font-bold">
                         {item.badge}
                       </span>
                     )}
                   </>
                 )}
                 {!sidebarOpen && (
-                  <div className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 shadow-lg">
+                  <div className="absolute left-full ml-2 px-2 py-1 bg-slate-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50">
                     {item.label}
                   </div>
                 )}
@@ -101,8 +101,8 @@ export function OfficerLayout() {
             );
           })}
 
-          <div className="mt-auto pt-4 border-t border-blue-800 flex flex-col gap-1">
-            <div className="text-xs font-semibold text-blue-300 uppercase tracking-wider mb-2 px-3">
+          <div className="mt-auto pt-4 border-t border-slate-200 flex flex-col gap-1">
+            <div className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2 px-3">
               {sidebarOpen ? 'Account' : '•••'}
             </div>
             {bottomNavItems.map((item) => {
@@ -113,25 +113,25 @@ export function OfficerLayout() {
                   to={item.path}
                   className={`flex items-center ${sidebarOpen ? 'px-3' : 'justify-center'} py-2.5 rounded-lg transition-colors group relative ${
                     isActive 
-                      ? 'bg-blue-600 text-white font-medium shadow-sm' 
-                      : 'text-blue-200 hover:bg-blue-800 hover:text-white'
+                      ? 'bg-blue-50 text-blue-700 font-medium' 
+                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
                   }`}
                 >
-                  <item.icon className={`w-5 h-5 ${isActive ? 'text-white' : 'text-blue-300 group-hover:text-white'}`} />
+                  <item.icon className={`w-5 h-5 ${isActive ? 'text-blue-600' : 'text-slate-400 group-hover:text-slate-600'}`} />
                   {sidebarOpen && <span className="ml-3 truncate">{item.label}</span>}
                   {!sidebarOpen && (
-                    <div className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 shadow-lg">
+                    <div className="absolute left-full ml-2 px-2 py-1 bg-slate-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50">
                       {item.label}
                     </div>
                   )}
                 </Link>
               );
             })}
-            <button className={`flex items-center ${sidebarOpen ? 'px-3' : 'justify-center'} py-2.5 rounded-lg text-red-300 hover:bg-red-500 hover:text-white transition-colors group relative mt-1`}>
-              <LogOut className="w-5 h-5" />
+            <button className={`flex items-center ${sidebarOpen ? 'px-3' : 'justify-center'} py-2.5 rounded-lg text-red-600 hover:bg-red-50 transition-colors group relative mt-1`}>
+              <LogOut className="w-5 h-5 text-red-500" />
               {sidebarOpen && <span className="ml-3 font-medium">Log out</span>}
               {!sidebarOpen && (
-                <div className="absolute left-full ml-2 px-2 py-1 bg-slate-900 text-white text-xs rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50 shadow-lg">
+                <div className="absolute left-full ml-2 px-2 py-1 bg-slate-800 text-white text-xs rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-50">
                   Log out
                 </div>
               )}
