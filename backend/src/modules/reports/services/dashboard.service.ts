@@ -28,7 +28,7 @@ export class DashboardService {
     if (currentClearance) {
       workflow = await Workflow.findOne({ clearanceId: currentClearance._id }).populate('stages.departmentId', 'name code');
       if (workflow && workflow.stages.length > 0) {
-        const approvedCount = workflow.stages.filter(s => s.status === 'APPROVED').length;
+        const approvedCount = workflow.stages.filter((s: any) => s.status === 'APPROVED').length;
         progress = Math.round((approvedCount / workflow.stages.length) * 100);
       }
     }

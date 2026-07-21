@@ -56,7 +56,7 @@ app.use('/api/v1', globalRouter);
 // ==========================================
 
 // Handle unhandled routes (404)
-app.all('*', (req: Request, res: Response, next: NextFunction) => {
+app.all(/(.*)/, (req: Request, res: Response, next: NextFunction) => {
   res.status(404).json({
     success: false,
     message: `Can't find ${req.originalUrl} on this server!`

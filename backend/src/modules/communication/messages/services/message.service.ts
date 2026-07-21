@@ -18,7 +18,7 @@ export class MessageService {
       await conv.populate('participants', 'firstName lastName role profileUrl');
       
       // Notify participants
-      participantIds.forEach(id => {
+      participantIds.forEach((id: mongoose.Types.ObjectId) => {
         socketManager.sendToUser(id.toString(), 'conversation:created', conv);
       });
     }
