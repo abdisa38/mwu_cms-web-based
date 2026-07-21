@@ -1,4 +1,4 @@
-import { Outlet, Link, useLocation } from "react-router";
+import { Outlet, Link, useLocation, useNavigate } from "react-router";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import mwuLogo from "@/imports/download.jfif";
 import { 
@@ -27,6 +27,7 @@ import { useState } from "react";
 export function RegistrarLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const navItems = [
     { icon: LayoutDashboard, label: "Dashboard", path: "/registrar" },
@@ -135,7 +136,7 @@ export function RegistrarLayout() {
                 </Link>
               );
             })}
-            <button className={`flex items-center ${sidebarOpen ? 'px-3' : 'justify-center'} py-2.5 rounded-lg text-red-600 hover:bg-red-50 transition-colors group relative mt-1`}>
+            <button onClick={() => navigate('/login')} className={`flex items-center ${sidebarOpen ? 'px-3' : 'justify-center'} py-2.5 rounded-lg text-red-600 hover:bg-red-50 transition-colors group relative mt-1`}>
               <LogOut className="w-5 h-5 text-red-500" />
               {sidebarOpen && <span className="ml-3 font-medium">Log out</span>}
               {!sidebarOpen && (
