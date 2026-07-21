@@ -18,7 +18,7 @@ export class MessageController {
   public async getMessages(req: Request, res: Response, next: NextFunction) {
     try {
       const userId = (req as any).user.userId || (req as any).user.id;
-      const conversationId = req.params.conversationId;
+      const conversationId = req.params.conversationId as string;
       const skip = parseInt(req.query.skip as string) || 0;
       
       const messages = await messageService.getMessages(conversationId, userId, skip);
@@ -53,7 +53,7 @@ export class MessageController {
   public async markAsRead(req: Request, res: Response, next: NextFunction) {
     try {
       const userId = (req as any).user.userId || (req as any).user.id;
-      const conversationId = req.params.conversationId;
+      const conversationId = req.params.conversationId as string;
       await messageService.markAsRead(conversationId, userId);
       res.status(200).json({ success: true, message: 'Messages marked as read' });
     } catch (error) {

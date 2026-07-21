@@ -13,7 +13,7 @@ router.post('/', authorize(UserRole.STUDENT), controller.submitAppeal);
 router.get('/my', authorize(UserRole.STUDENT), controller.getMyAppeals);
 
 // Department / Admin Routes
-router.get('/department/:departmentId', authorize(UserRole.STAFF, UserRole.DEPARTMENT_HEAD, UserRole.ADMIN), controller.getDepartmentAppeals);
-router.patch('/:id/review', authorize(UserRole.STAFF, UserRole.DEPARTMENT_HEAD, UserRole.REGISTRAR, UserRole.ADMIN), controller.reviewAppeal);
+router.get('/department/:departmentId', authorize(UserRole.OFFICER, UserRole.ADMIN), controller.getDepartmentAppeals);
+router.patch('/:id/review', authorize(UserRole.OFFICER, UserRole.REGISTRAR, UserRole.ADMIN), controller.reviewAppeal);
 
 export default router;
