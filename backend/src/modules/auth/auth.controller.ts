@@ -9,7 +9,8 @@ export class AuthController {
   public async register(req: Request, res: Response, next: NextFunction) {
     try {
       const validated = RegisterDto.parse(req.body);
-      const result = await authService.register(validated);
+      const file = req.file;
+      const result = await authService.register(validated, file?.path);
       res.status(201).json({ success: true, message: result.message });
     } catch (error: any) {
       next(error);
