@@ -39,11 +39,10 @@ const UserSchema = new Schema<IUser>({
   lastLoginAt: { type: Date }
 }, { timestamps: true });
 
-UserSchema.pre<IUser>('save', async function (next: any) {
+UserSchema.pre<IUser>('save', async function () {
   if (this.isModified('passwordHash')) {
     this.passwordHash = await hashPassword(this.passwordHash);
   }
-  next();
 });
 
 UserSchema.methods.comparePassword = async function (candidate: string): Promise<boolean> {
