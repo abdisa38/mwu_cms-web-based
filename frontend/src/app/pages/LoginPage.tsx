@@ -4,6 +4,7 @@ import { Button } from "@/app/components/ui/Button";
 import { Input } from "@/app/components/ui/Input";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import mwuLogo from "@/imports/download.jfif";
+import mwuBanner from "../../public/images.jfif";
 import { ArrowLeft, Building, User, Lock } from "lucide-react";
 import { useState } from "react";
 import { useLoginMutation } from "@/api/authApi";
@@ -41,29 +42,47 @@ export function LoginPage() {
   return (
     <div className="flex min-h-[calc(100vh-4rem)] w-full bg-white">
       {/* Left side - Illustration / Info (hidden on mobile) */}
-      <div className="hidden lg:flex w-1/2 bg-blue-600 flex-col justify-between p-12 text-white relative overflow-hidden">
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-overlay"></div>
-        <div className="relative z-10">
-          <Link to="/" className="inline-flex items-center text-blue-100 hover:text-white transition-colors">
+      <div className="hidden lg:flex w-1/2 bg-blue-600 flex-col p-12 text-white relative overflow-hidden">
+        {/* Decorative Background gradient */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-700 to-blue-900 opacity-90"></div>
+        
+        {/* Top Back Link */}
+        <div className="relative z-10 mb-10">
+          <Link to="/" className="inline-flex items-center text-blue-100 hover:text-white transition-colors font-medium">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Home
           </Link>
         </div>
         
-        <div className="relative z-10 max-w-lg mt-auto pb-20">
-          <h2 className="text-4xl font-bold mb-6 text-white leading-tight">
-            Streamline your university clearance process.
-          </h2>
-          <p className="text-blue-100 text-lg leading-relaxed mb-8">
-            The MWU e-Clearance System provides a seamless, secure, and fast way to manage your university clearance from anywhere.
-          </p>
-          <div className="flex items-center gap-4 text-sm font-medium text-blue-200">
-            <div className="flex items-center gap-2">
-              <User className="w-5 h-5" /> Students
+        {/* Beautiful Card with Banner Image */}
+        <div className="relative z-10 flex-1 flex flex-col items-center justify-center">
+          <div className="w-full max-w-lg rounded-2xl overflow-hidden shadow-2xl bg-white/10 backdrop-blur-md border border-white/20 p-2">
+            <div className="relative h-64 w-full rounded-xl overflow-hidden">
+              <img 
+                src={mwuBanner} 
+                alt="MWU Banner" 
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-blue-900/20 mix-blend-overlay"></div>
             </div>
-            <div className="w-1 h-1 rounded-full bg-blue-400" />
-            <div className="flex items-center gap-2">
-              <Building className="w-5 h-5" /> Staff
+            
+            <div className="p-8">
+              <h2 className="text-3xl font-bold mb-4 text-white leading-tight">
+                Streamline your university clearance process.
+              </h2>
+              <p className="text-blue-100 text-base leading-relaxed mb-6">
+                The MWU e-Clearance System provides a seamless, secure, and fast way to manage your university clearance from anywhere.
+              </p>
+              
+              <div className="flex items-center gap-4 text-sm font-medium text-blue-200">
+                <div className="flex items-center gap-2">
+                  <User className="w-5 h-5" /> Students
+                </div>
+                <div className="w-1 h-1 rounded-full bg-blue-400" />
+                <div className="flex items-center gap-2">
+                  <Building className="w-5 h-5" /> Staff
+                </div>
+              </div>
             </div>
           </div>
         </div>
