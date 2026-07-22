@@ -41,6 +41,7 @@ export class AuthController {
             email: result.user.email,
             firstName: result.user.firstName,
             lastName: result.user.lastName,
+            studentId: result.user.userId,
             status: result.user.status,
             role: (result.user.roleId as any)?.slug?.toUpperCase() || 'STUDENT'
           }
