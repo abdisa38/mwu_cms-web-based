@@ -1,8 +1,13 @@
 import { Link } from "react-router";
 import { Button } from "@/app/components/ui/Button";
-import { ArrowRight, CheckCircle2, Shield, Zap, FileText } from "lucide-react";
+import { ArrowRight, CheckCircle2, Shield, Zap, FileText, ChevronDown } from "lucide-react";
+import { useGetPublicStatsQuery } from "@/api/publicApi";
+import { useState } from "react";
 
 export function LandingPage() {
+  const { data: statsResponse, isLoading } = useGetPublicStatsQuery();
+  const stats = statsResponse?.data;
+
   return (
     <div className="flex flex-col w-full">
       {/* Hero Section */}
@@ -30,22 +35,30 @@ export function LandingPage() {
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </Link>
-            <Button variant="outline" size="lg" className="w-full sm:w-auto h-14 px-8 text-base bg-white">
-              Learn More
-            </Button>
+            <a href="#features">
+              <Button variant="outline" size="lg" className="w-full sm:w-auto h-14 px-8 text-base bg-white">
+                Learn More
+              </Button>
+            </a>
           </div>
           
           <div className="mt-20 flex flex-wrap justify-center gap-x-12 gap-y-8 text-slate-500">
             <div className="flex flex-col items-center gap-2">
-              <span className="text-3xl font-bold text-slate-900">10k+</span>
+              <span className="text-3xl font-bold text-slate-900">
+                {isLoading ? "..." : `${(stats?.totalStudentsCleared || 0) / 1000}k+`}
+              </span>
               <span className="text-sm font-medium">Students Cleared</span>
             </div>
             <div className="flex flex-col items-center gap-2">
-              <span className="text-3xl font-bold text-slate-900">25+</span>
+              <span className="text-3xl font-bold text-slate-900">
+                {isLoading ? "..." : `${stats?.totalDepartments || 0}+`}
+              </span>
               <span className="text-sm font-medium">Departments</span>
             </div>
             <div className="flex flex-col items-center gap-2">
-              <span className="text-3xl font-bold text-slate-900">24hr</span>
+              <span className="text-3xl font-bold text-slate-900">
+                {isLoading ? "..." : `${stats?.avgApprovalTimeHours || 0}hr`}
+              </span>
               <span className="text-sm font-medium">Average Approval</span>
             </div>
           </div>
@@ -88,6 +101,39 @@ export function LandingPage() {
           </div>
         </div>
       </section>
+
+      {/* FAQs Section */}
+      <section id="faq" className="w-full py-24 bg-slate-50 border-y border-slate-200">
+        <div className="container px-4 md:px-6 mx-auto max-w-4xl">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl mb-4">
+              Frequently Asked Questions
+            </h2>
+            <p className="text-slate-600 text-lg max-w-[600px] mx-auto">
+              Got questions? We've got answers. Here are some of the most common inquiries.
+            </p>
+          </div>
+          
+          <div className="space-y-4">
+            <FaqItem 
+              question="How long does the clearance process take?" 
+              answer="With the new digital system, the average clearance time is under 24 hours. Most departments process requests automatically once you initiate them." 
+            />
+            <FaqItem 
+              question="Do I need to visit any offices physically?" 
+              answer="No, the entire process is handled digitally. Exceptions are made only if there are specific unresolved issues (like unreturned books) that require your physical presence." 
+            />
+            <FaqItem 
+              question="How do I get my final clearance certificate?" 
+              answer="Once all departments have approved your request, the Registrar office will issue a digital clearance certificate with a secure QR code which you can download." 
+            />
+            <FaqItem 
+              question="Is my digital certificate valid for employers?" 
+              answer="Yes! Employers and institutions can easily verify the authenticity of your digital certificate using the public Verify Certificate portal on this website." 
+            />
+          </div>
+        </div>
+      </section>
       
       {/* CTA Section */}
       <section className="w-full py-20 bg-blue-600 text-white">
@@ -117,6 +163,27 @@ function FeatureCard({ icon, title, description }: { icon: React.ReactNode, titl
       </div>
       <h3 className="text-xl font-bold text-slate-900 mb-3">{title}</h3>
       <p className="text-slate-600 leading-relaxed">{description}</p>
+    </div>
+  );
+}
+
+function FaqItem({ question, answer }: { question: string, answer: string }) {
+  const [isOpen, setIsOpen] = useState(false);
+  
+  return (
+    <div className="border border-slate-200 rounded-xl overflow-hidden bg-white transition-all">
+      <button 
+        className="w-full text-left px-6 py-4 flex items-center justify-between font-semibold text-slate-900 hover:bg-slate-50 transition-colors"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span>{question}</span>
+        <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+      {isOpen && (
+        <div className="px-6 pb-4 pt-2 text-slate-600 leading-relaxed border-t border-slate-100">
+          {answer}
+        </div>
+      )}
     </div>
   );
 }

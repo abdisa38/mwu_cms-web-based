@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { Button } from "@/app/components/ui/Button";
 import { Input } from "@/app/components/ui/Input";
 import { Certificate } from "@/app/components/shared/Certificate";
+import { useVerifyCertificateMutation } from "@/api/publicApi";
 import { 
   Search, 
   ShieldCheck, 
@@ -15,23 +16,26 @@ import {
 
 export function VerifyCertificate() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [isSearching, setIsSearching] = useState(false);
   const [result, setResult] = useState<"idle" | "valid" | "invalid">("idle");
+  const [certData, setCertData] = useState<any>(null);
+  
+  const [verifyCertificate, { isLoading: isSearching }] = useVerifyCertificateMutation();
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
     
-    setIsSearching(true);
-    // Simulate API call
-    setTimeout(() => {
-      setIsSearching(false);
-      if (searchQuery.toLowerCase().includes("invalid") || searchQuery === "123") {
-        setResult("invalid");
-      } else {
+    try {
+      const response = await verifyCertificate(searchQuery).unwrap();
+      if (response.success && response.data) {
+        setCertData(response.data);
         setResult("valid");
+      } else {
+        setResult("invalid");
       }
-    }, 1200);
+    } catch (error) {
+      setResult("invalid");
+    }
   };
 
   return (
@@ -137,10 +141,10 @@ export function VerifyCertificate() {
                 <div className="p-6 md:p-8 bg-slate-50 flex justify-center overflow-x-auto">
                   <div className="min-w-[800px] w-full transform scale-90 sm:scale-100 origin-top">
                     <Certificate 
-                      certNumber={searchQuery.toUpperCase()}
-                      studentName="John Doe"
-                      studentId="UGR/1234/12"
-                      department="Computer Science"
+                      certNumber={certData?.certificateNumber || searchQuery.toUpperCase()}
+                      studentName={certData?.studentName || "Unknown"}
+                      studentId={certData?.studentId?.studentId || "Unknown"}
+                      department={certData?.studentId?.department?.name || "Unknown"}
                     />
                   </div>
                 </div>
@@ -160,15 +164,4 @@ export function VerifyCertificate() {
                   </div>
                   <div>
                     <p className="text-xs text-slate-500 font-medium uppercase tracking-wider mb-1">Blockchain ID</p>
-                    <p className="font-mono text-xs text-slate-600 bg-slate-100 p-1 rounded break-all">0x8f4...3b2a</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-        </div>
-      </section>
-    </div>
-  );
-}
+                    <p className="font-mono text-xs text-slate-600 bg-slate-100 p-1 rounded break-all">{certData?.blockchainHash ? certData.blockchai

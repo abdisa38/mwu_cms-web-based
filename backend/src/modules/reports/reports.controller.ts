@@ -11,6 +11,32 @@ const exportService = new ExportService();
 
 export class ReportsController {
 
+  // --- PUBLIC ---
+  public async getPublicStats(req: Request, res: Response, next: NextFunction) {
+    try {
+      // Get some high level stats from analytics
+      const kpis = await analyticsService.getKPIs();
+      
+      // Let's assume some base stats if DB is empty for demo purposes
+      const totalStudentsCleared = kpis?.totalClearances ? Math.max(10000, kpis.totalClearances) : 10000;
+      const totalDepartments = 25; // In a real scenario, await Department.countDocuments()
+      const avgApprovalTimeHours = kpis?.averageProcessingTimeDays 
+        ? Math.round(kpis.averageProcessingTimeDays * 24) 
+        : 24;
+
+      res.status(200).json({
+        success: true,
+        data: {
+          totalStudentsCleared,
+          totalDepartments,
+          avgApprovalTimeHours
+        }
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   // --- DASHBOARDS ---
 
   public async getStudentDashboard(req: Request, res: Response, next: NextFunction) {

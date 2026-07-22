@@ -6,6 +6,9 @@ import { UserRole } from '../users/user.model';
 const router = Router();
 const controller = new ReportsController();
 
+// Public Routes
+router.get('/public/stats', controller.getPublicStats);
+
 router.use(authenticate);
 
 // Dashboards
