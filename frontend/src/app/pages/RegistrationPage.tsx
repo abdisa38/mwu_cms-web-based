@@ -93,7 +93,7 @@ export function RegistrationPage() {
       formData.append("idDocument", idDocument);
       formData.append("roleSlug", "student");
 
-      const response = await fetch("http://localhost:5000/api/auth/register", {
+      const response = await fetch("http://localhost:5000/api/v1/auth/register", {
         method: "POST",
         body: formData,
       });
