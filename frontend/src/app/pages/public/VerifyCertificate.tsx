@@ -164,4 +164,15 @@ export function VerifyCertificate() {
                   </div>
                   <div>
                     <p className="text-xs text-slate-500 font-medium uppercase tracking-wider mb-1">Blockchain ID</p>
-                    <p className="font-mono text-xs text-slate-600 bg-slate-100 p-1 rounded break-all">{certData?.blockchainHash ? certData.blockchai
+                    <p className="font-mono text-xs text-slate-600 bg-slate-100 p-1 rounded break-all">{certData?.blockchainHash ? certData.blockchainHash.substring(0, 16) + "..." : "N/A"}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+        </div>
+      </section>
+    </div>
+  );
+}
