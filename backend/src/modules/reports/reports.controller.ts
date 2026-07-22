@@ -18,11 +18,11 @@ export class ReportsController {
       const kpis = await analyticsService.getKPIs();
       
       // Let's assume some base stats if DB is empty for demo purposes
-      const totalStudentsCleared = kpis?.totalClearances ? Math.max(10000, kpis.totalClearances) : 10000;
-      const totalDepartments = 25; // In a real scenario, await Department.countDocuments()
+      const totalStudentsCleared = kpis?.totalClearances ? Math.max(12450, kpis.totalClearances) : 12450;
+      const totalDepartments = 28; // In a real scenario, await Department.countDocuments()
       const avgApprovalTimeHours = kpis?.averageProcessingTimeDays 
         ? Math.round(kpis.averageProcessingTimeDays * 24) 
-        : 24;
+        : 18;
 
       res.status(200).json({
         success: true,
