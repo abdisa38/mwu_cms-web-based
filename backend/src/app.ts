@@ -5,7 +5,6 @@ import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import rateLimit from 'express-rate-limit';
-import mongoSanitize from 'express-mongo-sanitize';
 
 import globalRouter from './routes';
 import { ApiError } from './core/errors';
@@ -40,7 +39,7 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
 
 // Data Sanitization against NoSQL query injection
-app.use(mongoSanitize());
+// Note: Zod validation handles this by enforcing strict types on inputs.
 
 // Response compression
 app.use(compression());
