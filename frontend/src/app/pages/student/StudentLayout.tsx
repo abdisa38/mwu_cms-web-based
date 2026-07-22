@@ -1,4 +1,6 @@
 import { Outlet, Link, useLocation, useNavigate } from "react-router";
+import { useSelector } from "react-redux";
+import type { RootState } from "@/store";
 import { ImageWithFallback } from "@/app/components/figma/ImageWithFallback";
 import mwuLogo from "@/imports/download.jfif";
 import { Button } from "@/app/components/ui/Button";
@@ -16,7 +18,8 @@ import {
   Settings, 
   LogOut,
   Menu,
-  Moon
+  Moon,
+  Clock
 } from "lucide-react";
 import { useState } from "react";
 
@@ -24,6 +27,26 @@ export function StudentLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
+  const user = useSelector((state: RootState) => state.auth.user);
+
+  if (user?.status === 'PENDING_VERIFICATION') {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4 font-sans">
+        <div className="max-w-md w-full bg-white rounded-2xl shadow-sm border border-slate-200 p-8 text-center">
+          <div className="w-16 h-16 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mx-auto mb-6">
+            <Clock className="w-8 h-8" />
+          </div>
+          <h2 className="text-2xl font-bold text-slate-900 mb-2">Registration Pending</h2>
+          <p className="text-slate-600 mb-8">
+            Your registration is currently under review by the registrar. You will be able to access your dashboard once your student ID has been verified.
+          </p>
+          <Button onClick={() => navigate('/login')} variant="outline" className="w-full">
+            Return to Login
+          </Button>
+        </div>
+      </div>
+    );
+  }
 
   const navItems = [
     { icon: LayoutDashboard, label: "Dashboard", path: "/student" },
@@ -176,15 +199,15 @@ export function StudentLayout() {
             
             <div className="w-px h-6 bg-slate-200 mx-1 sm:mx-2 hidden sm:block"></div>
             
-            <button className="flex items-center gap-2 hover:bg-slate-50 p-1 pr-2 rounded-full transition-colors border border-transparent hover:border-slate-200">
+            <Link to="/student/profile" className="flex items-center gap-2 hover:bg-slate-50 p-1 pr-2 rounded-full transition-colors border border-transparent hover:border-slate-200">
               <div className="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-sm shadow-sm">
-                JD
+                {user?.firstName?.[0]}{user?.lastName?.[0]}
               </div>
               <div className="hidden md:flex flex-col items-start">
-                <span className="text-sm font-medium text-slate-900 leading-none">John Doe</span>
-                <span className="text-xs text-slate-500 mt-0.5">UGR/1234/12</span>
+                <span className="text-sm font-medium text-slate-900 leading-none">{user?.firstName} {user?.lastName}</span>
+                <span className="text-xs text-slate-500 mt-0.5">{user?.studentId || user?.email}</span>
               </div>
-            </button>
+            </Link>
           </div>
         </header>
 
@@ -194,7 +217,7 @@ export function StudentLayout() {
         </div>
       </main>
       
-      {/* Mobile Bottom Navigation (optional, just showing layout intention) */}
+      {/* Mobile Bottom Navigation */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 flex justify-around p-2 pb-safe z-50">
         <Link to="/student" className="flex flex-col items-center p-2 text-blue-600">
           <LayoutDashboard className="w-5 h-5" />
