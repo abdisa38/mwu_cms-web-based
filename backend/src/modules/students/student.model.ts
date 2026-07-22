@@ -15,6 +15,7 @@ export interface IStudent extends Document {
   department: mongoose.Types.ObjectId;
   enrollmentYear: number;
   academicStatus: AcademicStatus;
+  idDocumentUrl?: string;
 }
 
 const StudentSchema: Schema = new Schema({
@@ -53,6 +54,9 @@ const StudentSchema: Schema = new Schema({
     type: String,
     enum: Object.values(AcademicStatus),
     default: AcademicStatus.ACTIVE
+  },
+  idDocumentUrl: {
+    type: String
   }
 }, { timestamps: true });
 
