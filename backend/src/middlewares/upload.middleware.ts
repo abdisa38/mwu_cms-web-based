@@ -1,4 +1,5 @@
 import multer from 'multer';
+import { BadRequestError } from '../core/errors';
 import path from 'path';
 import fs from 'fs';
 
