@@ -4,6 +4,8 @@ import { BadRequestError, UnauthorizedError } from '../../../core/errors';
 import { generateAccessToken } from '../../../utils/jwt.util';
 import { generateRandomToken, hashToken } from '../../../utils/crypto.util';
 import mongoose from 'mongoose';
+import Department from '../departments/department.model';
+import Student from '../students/student.model';
 
 export class AuthService {
   private repository: AuthRepository;
@@ -19,10 +21,6 @@ export class AuthService {
     const roleSlug = data.roleSlug || 'student';
     const role = await this.repository.findRoleBySlug(roleSlug);
     if (!role) throw new BadRequestError('Role not found');
-
-    const mongoose = require('mongoose');
-    const Department = mongoose.model('Department');
-    const Student = mongoose.model('Student');
 
     let dept = null;
     if (roleSlug === 'student' && data.department) {

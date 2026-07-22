@@ -72,11 +72,18 @@ app.use((err: Error | ApiError, req: Request, res: Response, next: NextFunction)
   let message = 'Internal Server Error';
 
   if ('statusCode' in err) {
-    statusCode = err.statusCode;
+    statusCode = err.statusCode as number;
     message = err.message;
+  } else if (err.name === 'ZodError') {
+    statusCode = 400;
+    message = 'Validation Error: ' + (err as any).errors.map((e: any) => e.message).join(', ');
   }
 
   // Handle Mongoose/MongoDB specific errors gracefully here if needed (e.g. Duplicate Key)
+  if (err.name === 'MongoServerError' && (err as any).code === 11000) {
+    statusCode = 400;
+    message = 'Duplicate key error: A record with this unique value already exists.';
+  }
 
   res.status(statusCode).json({
     success: false,
