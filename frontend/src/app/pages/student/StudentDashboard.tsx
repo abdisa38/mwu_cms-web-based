@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 import { Button } from "@/app/components/ui/Button";
+import { useSelector } from "react-redux";
+import type { RootState } from "@/store";
 import { 
   CheckCircle2, 
   Clock, 
@@ -12,14 +14,16 @@ import {
 } from "lucide-react";
 
 export function StudentDashboard() {
+  const user = useSelector((state: RootState) => state.auth.user);
+
   return (
     <div className="max-w-7xl mx-auto space-y-6 pb-20 md:pb-0">
       {/* Welcome Section */}
       <div className="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm flex flex-col md:flex-row gap-6 justify-between items-start md:items-center relative overflow-hidden">
         <div className="absolute right-0 top-0 w-64 h-64 bg-blue-50 rounded-full blur-3xl opacity-50 -mr-20 -mt-20 pointer-events-none" />
         <div className="relative z-10">
-          <h2 className="text-2xl font-bold text-slate-900 mb-1">Welcome back, John!</h2>
-          <p className="text-slate-600 mb-4">Computer Science • Year 4 • UGR/1234/12</p>
+          <h2 className="text-2xl font-bold text-slate-900 mb-1">Welcome back, {user?.firstName || 'Student'}!</h2>
+          <p className="text-slate-600 mb-4">{user?.studentId || user?.email}</p>
           <div className="inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-sm font-medium text-blue-700">
             <span className="flex h-2 w-2 rounded-full bg-blue-600 mr-2 animate-pulse"></span>
             Clearance In Progress
