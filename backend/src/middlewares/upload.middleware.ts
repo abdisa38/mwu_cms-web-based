@@ -16,10 +16,6 @@ const storage = multer.diskStorage({
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
     cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
   }
-});
-
-import { BadRequestError } from '../core/errors';
-
 // File filter for extra safety
 const fileFilter = (req: any, file: Express.Multer.File, cb: any) => {
   const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'];
