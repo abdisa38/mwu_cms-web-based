@@ -67,7 +67,9 @@ export class AuthService {
     const user = await this.repository.findUserByEmail(data.email);
     if (!user) throw new UnauthorizedError('Invalid credentials');
 
-    if (user.status !== 'ACTIVE') throw new UnauthorizedError(`Account is ${user.status}`);
+    if (user.status === 'SUSPENDED' || user.status === 'LOCKED' || user.status === 'DISABLED') {
+      throw new UnauthorizedError(`Account is ${user.status}`);
+    }
 
     const isMatch = await user.comparePassword(data.password);
     if (!isMatch) {
