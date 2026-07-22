@@ -8,12 +8,19 @@ export enum UserRole {
   ADMIN = 'ADMIN'
 }
 
+export enum UserStatus {
+  PENDING = 'PENDING',
+  ACTIVE = 'ACTIVE',
+  SUSPENDED = 'SUSPENDED'
+}
+
 export interface IUser extends Document {
   email: string;
   password?: string;
   role: UserRole;
-  isActive: boolean;
-  lastLogin?: Date;
+  status: UserStatus;
+  failedLoginAttempts: number;
+  lastLoginAt?: Date;
   comparePassword(candidatePassword: string): Promise<boolean>;
 }
 
@@ -35,11 +42,16 @@ const UserSchema: Schema = new Schema({
     enum: Object.values(UserRole),
     required: true
   },
-  isActive: {
-    type: Boolean,
-    default: true
+  status: {
+    type: String,
+    enum: Object.values(UserStatus),
+    default: UserStatus.PENDING
   },
-  lastLogin: {
+  failedLoginAttempts: {
+    type: Number,
+    default: 0
+  },
+  lastLoginAt: {
     type: Date
   }
 }, { timestamps: true });

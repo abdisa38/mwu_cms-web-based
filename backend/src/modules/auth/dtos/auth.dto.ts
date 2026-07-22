@@ -1,12 +1,15 @@
 import { z } from 'zod';
 
 export const RegisterDto = z.object({
-  userId: z.string().min(3).max(20),
   email: z.string().email(),
   password: z.string().min(8).max(128)
     .regex(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Password must contain at least one uppercase letter, one lowercase letter, one number and one special character'),
   firstName: z.string().min(2).max(50),
   lastName: z.string().min(2).max(50),
+  phoneNumber: z.string().min(8).optional(),
+  studentId: z.string().min(3),
+  college: z.string().min(2),
+  department: z.string().min(2),
   roleSlug: z.string().optional()
 });
 
