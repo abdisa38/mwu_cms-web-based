@@ -12,7 +12,7 @@ export class AuthService {
     this.repository = new AuthRepository();
   }
 
-  public async register(data: RegisterInput) {
+  public async register(data: RegisterInput, idDocumentUrl?: string) {
     const existingUser = await this.repository.findUserByEmail(data.email);
     if (existingUser) throw new BadRequestError('Email already in use');
 
@@ -20,11 +20,45 @@ export class AuthService {
     const role = await this.repository.findRoleBySlug(roleSlug);
     if (!role) throw new BadRequestError('Role not found');
 
+    const mongoose = require('mongoose');
+    const Department = mongoose.model('Department');
+    const Student = mongoose.model('Student');
+
+    let dept = null;
+    if (roleSlug === 'student' && data.department) {
+      dept = await Department.findOne({ name: { $regex: new RegExp(`^${data.department}$`, 'i') } });
+      if (!dept) {
+         dept = await Department.create({ 
+           name: data.department, 
+           code: data.department.substring(0, 3).toUpperCase(), 
+           faculty: data.college || 'Unknown'
+         });
+      }
+    }
+
     const user = await this.repository.createUser({
-      ...data,
+      userId: data.studentId || data.email,
+      email: data.email,
       passwordHash: data.password,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      departmentId: dept ? dept._id : undefined,
       roleId: role._id as mongoose.Types.ObjectId,
+      status: 'PENDING_VERIFICATION' as any
     });
+
+    if (roleSlug === 'student' && dept) {
+      await Student.create({
+        user: user._id,
+        studentId: data.studentId,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        department: dept._id,
+        enrollmentYear: new Date().getFullYear(),
+        academicStatus: 'ACTIVE',
+        idDocumentUrl
+      });
+    }
 
     return { message: 'Registration successful. Pending verification.' };
   }
