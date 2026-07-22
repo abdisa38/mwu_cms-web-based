@@ -4,8 +4,8 @@ import { BadRequestError, UnauthorizedError } from '../../../core/errors';
 import { generateAccessToken } from '../../../utils/jwt.util';
 import { generateRandomToken, hashToken } from '../../../utils/crypto.util';
 import mongoose from 'mongoose';
-import Department from '../departments/department.model';
-import Student from '../students/student.model';
+import Department from '../../departments/department.model';
+import Student from '../../students/student.model';
 
 export class AuthService {
   private repository: AuthRepository;
