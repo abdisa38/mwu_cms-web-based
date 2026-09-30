@@ -3,9 +3,16 @@ import { store } from '@/store';
 import { logout } from '@/store/slices/authSlice';
 import { toast } from 'sonner';
 
+const getBaseUrl = (): string => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (!envUrl) return '/api/v1';
+  const clean = envUrl.trim().replace(/\/+$/, '');
+  return clean.endsWith('/api/v1') ? clean : `${clean}/api/v1`;
+};
+
 // Create enterprise Axios instance
 export const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_API_URL || 'http://localhost:5000/api',
+  baseURL: getBaseUrl(),
   timeout: 15000,
   headers: {
     'Content-Type': 'application/json',

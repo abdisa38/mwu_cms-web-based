@@ -6,9 +6,25 @@ class SocketManager {
   private io!: Server;
 
   public initialize(server: HttpServer) {
+    const allowedOrigins = process.env.FRONTEND_URL
+      ? process.env.FRONTEND_URL.split(',').map((url) => url.trim().replace(/\/+$/, ''))
+      : ['http://localhost:3000', 'http://localhost:5173'];
+
     this.io = new Server(server, {
       cors: {
-        origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+        origin: (origin, callback) => {
+          if (!origin) return callback(null, true);
+          const sanitizedOrigin = origin.replace(/\/+$/, '');
+          if (
+            allowedOrigins.includes('*') ||
+            allowedOrigins.includes(sanitizedOrigin) ||
+            sanitizedOrigin.endsWith('.vercel.app') ||
+            process.env.NODE_ENV !== 'production'
+          ) {
+            return callback(null, true);
+          }
+          return callback(new Error('Origin not allowed by CORS'));
+        },
         methods: ['GET', 'POST'],
         credentials: true
       }

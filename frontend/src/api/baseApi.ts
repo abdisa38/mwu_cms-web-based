@@ -1,9 +1,17 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { RootState } from '../store';
 
+const getBaseUrl = (): string => {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (!envUrl) return '/api/v1';
+  const clean = envUrl.trim().replace(/\/+$/, '');
+  return clean.endsWith('/api/v1') ? clean : `${clean}/api/v1`;
+};
+
 // Base API configuration using RTK Query
 const baseQuery = fetchBaseQuery({
-  baseUrl: '/api/v1', // Leverages Vite proxy
+  baseUrl: getBaseUrl(),
+
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
     if (token) {

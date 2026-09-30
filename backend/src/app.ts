@@ -27,11 +27,36 @@ const limiter = rateLimit({
 app.use('/api', limiter);
 
 // Enable CORS (Allow frontend)
+const allowedOrigins = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(',').map((url) => url.trim().replace(/\/+$/, ''))
+  : ['http://localhost:3000', 'http://localhost:5173'];
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    const sanitizedOrigin = origin.replace(/\/+$/, '');
+    if (
+      allowedOrigins.includes('*') ||
+      allowedOrigins.includes(sanitizedOrigin) ||
+      sanitizedOrigin.endsWith('.vercel.app') ||
+      process.env.NODE_ENV !== 'production'
+    ) {
+      return callback(null, true);
+    }
+    return callback(new Error(`Origin ${origin} not allowed by CORS`));
+  },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS']
 }));
+
+// Cloud platform health check routes
+app.get('/health', (req: Request, res: Response) => {
+  res.status(200).json({ status: 'ok', uptime: process.uptime(), timestamp: new Date() });
+});
+
+app.get('/', (req: Request, res: Response) => {
+  res.status(200).json({ status: 'ok', message: 'MWU Clearance System API is active' });
+});
 
 // Payload parsing
 app.use(express.json({ limit: '10mb' }));
@@ -76,7 +101,8 @@ app.use((err: Error | ApiError, req: Request, res: Response, next: NextFunction)
     message = err.message;
   } else if (err.name === 'ZodError') {
     statusCode = 400;
-    message = 'Validation Error: ' + (err as any).errors.map((e: any) => e.message).join(', ');
+    const errList = (err as any).errors || (err as any).issues || [];
+    message = 'Validation Error: ' + errList.map((e: any) => e.message).join(', ');
   }
 
   // Handle Mongoose/MongoDB specific errors gracefully here if needed (e.g. Duplicate Key)
