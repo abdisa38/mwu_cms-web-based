@@ -31,7 +31,8 @@ export class CertificateService {
     const certNumber = `MWU-CERT-${crypto.randomBytes(4).toString('hex').toUpperCase()}`;
     
     // 2. The URL that anyone can scan to verify this certificate
-    const verifyUrl = `${process.env.FRONTEND_URL || 'http://localhost:3000'}/verify/${certNumber}`;
+    const frontendBase = (process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',')[0].trim() : 'http://localhost:3000').replace(/\/+$/, '');
+    const verifyUrl = `${frontendBase}/verify/${certNumber}`;
 
     // 3. Generate QR Code containing the verifyUrl
     const qrDataUrl = await this.qrService.generateQRCode(verifyUrl);
